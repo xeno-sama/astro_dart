@@ -1,0 +1,42 @@
+{
+    "sourceFile": "bin/usefuls.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1642871854312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642871953014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,33 +1,22 @@\n-// import 'package:complex/complex.dart';\n-// import 'dart:math';\n-// import 'dart:convert';\n-// import 'vsop/src/complex.dart';\n-\n-// ignore_for_file: avoid_function_literals_in_foreach_calls\n-\n import 'dart:io';\n \n-enum Names { serj, anton, taras }\n-\n void main() {\n-  \n-  // распаковка имени с ENUM\n+  //    распаковка имени с ENUM\n+  // enum Names { serj, anton, taras }\n   // Names.values.forEach((v) => {\n   //       if (v.index == 2) {print(v.name)}\n   //     });\n-  \n-  \n+\n+  //    Работа с датами\n   // DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n   // DateTime dat2 = DateTime.utc(1978, 6, 27, 16, 52);\n   // var dat2 = dat.add(Duration(days: 10));\n-  \n-  \n+  // data.isBefore(dataNext\n+  // Duration diff = dat2.difference(dat);\n+\n+  //    Работа с файлами\n   // File file = File('file.txt');\n   // while (dat.isBefore(dat2)) {\n   //   dat = dat.add(Duration(days: 1));\n   //   file.writeAsStringSync(\"$dat\", mode: FileMode.append);\n-    \n-  }\n-\n-  // Duration diff = dat2.difference(dat);\n }\n"
+                },
+                {
+                    "date": 1642907460142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,7 @@\n \n   //    Работа с файлами\n   // File file = File('file.txt');\n   // while (dat.isBefore(dat2)) {\n+  //   file.writeAsStringSync(\"$dat\", mode: FileMode.append);\n   //   dat = dat.add(Duration(days: 1));\n-  //   file.writeAsStringSync(\"$dat\", mode: FileMode.append);\n }\n"
+                },
+                {
+                    "date": 1642996229478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import 'dart:io';\n+// import 'dart:io';\n \n void main() {\n   //    распаковка имени с ENUM\n   // enum Names { serj, anton, taras }\n"
+                },
+                {
+                    "date": 1643017243899,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n \n   //    Работа с датами\n   // DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n   // DateTime dat2 = DateTime.utc(1978, 6, 27, 16, 52);\n-  // var dat2 = dat.add(Duration(days: 10));\n-  // data.isBefore(dataNext\n+  // var dat2 = dat.add(Duration(days: 1));\n+  // data.isBefore(dataNext)\n   // Duration diff = dat2.difference(dat);\n \n   //    Работа с файлами\n   // File file = File('file.txt');\n"
+                },
+                {
+                    "date": 1643027535022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n   // var dat2 = dat.add(Duration(days: 1));\n   // data.isBefore(dataNext)\n   // Duration diff = dat2.difference(dat);\n \n+  // await Future.delayed(const Duration(seconds: 5));\n+\n   //    Работа с файлами\n   // File file = File('file.txt');\n   // while (dat.isBefore(dat2)) {\n   //   file.writeAsStringSync(\"$dat\", mode: FileMode.append);\n"
+                },
+                {
+                    "date": 1643027572707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n   // data.isBefore(dataNext)\n   // Duration diff = dat2.difference(dat);\n \n   // await Future.delayed(const Duration(seconds: 5));\n+  // sleep(Duration(seconds: 5));\n \n   //    Работа с файлами\n   // File file = File('file.txt');\n   // while (dat.isBefore(dat2)) {\n"
+                }
+            ],
+            "date": 1642871854312,
+            "name": "Commit-0",
+            "content": "// import 'package:complex/complex.dart';\n// import 'dart:math';\n// import 'dart:convert';\n// import 'vsop/src/complex.dart';\n\n// ignore_for_file: avoid_function_literals_in_foreach_calls\n\nimport 'dart:io';\n\nenum Names { serj, anton, taras }\n\nvoid main() {\n  \n  // распаковка имени с ENUM\n  // Names.values.forEach((v) => {\n  //       if (v.index == 2) {print(v.name)}\n  //     });\n  \n  \n  // DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n  // DateTime dat2 = DateTime.utc(1978, 6, 27, 16, 52);\n  // var dat2 = dat.add(Duration(days: 10));\n  \n  \n  // File file = File('file.txt');\n  // while (dat.isBefore(dat2)) {\n  //   dat = dat.add(Duration(days: 1));\n  //   file.writeAsStringSync(\"$dat\", mode: FileMode.append);\n    \n  }\n\n  // Duration diff = dat2.difference(dat);\n}\n"
+        }
+    ]
+}

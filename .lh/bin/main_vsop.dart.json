@@ -1,0 +1,1030 @@
+{
+    "sourceFile": "bin/main_vsop.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 253,
+            "patches": [
+                {
+                    "date": 1641639590991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641962686616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n-import '../simple/defs/func.dart';\n-import '../simple/defs/domes.dart';\n+import '../vsop/func.dart';\n+import '../vsop/domes.dart';\n \n void main() {\n   var LON = 74.8;\n   var LAT = 42.6;\n"
+                },
+                {
+                    "date": 1641965784841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n-import '../vsop/func.dart';\n-import '../vsop/domes.dart';\n+import 'vsop/func.dart';\n+import 'vsop/domes.dart';\n \n void main() {\n   var LON = 74.8;\n   var LAT = 42.6;\n"
+                },
+                {
+                    "date": 1642124626601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   var LON = 74.8;\n   var LAT = 42.6;\n   var d = num_date(1977, 5, 27, 16, 52);\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n+  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n"
+                },
+                {
+                    "date": 1642127053823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n-import 'vsop/func.dart';\n+import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n \n void main() {\n   var LON = 74.8;\n   var LAT = 42.6;\n-  var d = num_date(1977, 5, 27, 16, 52);\n+  var d = numDate(1977, 5, 27, 16, 52);\n \n   var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   // for (var item in _planets) {\n"
+                },
+                {
+                    "date": 1642157028670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,22 @@\n-// import '../models/simple.dart';\n-// ignore_for_file: unused_local_variable, non_constant_identifier_names\n-\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n+import 'vsop/astronomy.dart';\n+import 'vsop/calc_moon.dart';\n+import 'vsop/src/classes.dart';\n \n void main() {\n-  var LON = 74.8;\n-  var LAT = 42.6;\n-  var d = numDate(1977, 5, 27, 16, 52);\n+  int year = 1977;\n+  int month = 5;\n+  int day = 27;\n+  int hour = 16;\n+  int minute = 52;\n+  double lat = 42.9;\n+  double lon = 74.6;\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n+  var d = numDate(year, month, day, hour, minute);\n+  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n \n-  // for (var item in _planets) {\n-  //   print(item[0]);\n-  // }\n-  // print('__');\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-\n-  // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1642157973453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import 'dart:html';\n+\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n@@ -15,8 +17,10 @@\n \n   var d = numDate(year, month, day, hour, minute);\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n \n-  for (var item in _domes) {\n-    print(item.toStringAsFixed(2));\n-  }\n+  // for (var item in _domes) {\n+  //   print(item.toStringAsFixed(2));\n+  // }\n+  List bodyList = [Body.values];\n+  print(bodyList);\n }\n"
+                },
+                {
+                    "date": 1642157996042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n-import 'dart:html';\n-\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n"
+                },
+                {
+                    "date": 1642158039357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n \n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n   // }\n-  List bodyList = [Body.values];\n+  List bodyList = Body.values;\n   print(bodyList);\n }\n"
+                },
+                {
+                    "date": 1642158118510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,6 +19,9 @@\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n   // }\n   List bodyList = Body.values;\n+  for (var val in bodyList) {\n+    print(val.toString());\n+  }\n   print(bodyList);\n }\n"
+                },
+                {
+                    "date": 1642158153941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n   //   print(item.toStringAsFixed(2));\n   // }\n   List bodyList = Body.values;\n   for (var val in bodyList) {\n-    print(val.toString());\n+    print(val.index);\n   }\n   print(bodyList);\n }\n"
+                },
+                {
+                    "date": 1642158212011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,6 +22,5 @@\n   List bodyList = Body.values;\n   for (var val in bodyList) {\n     print(val.index);\n   }\n-  print(bodyList);\n }\n"
+                },
+                {
+                    "date": 1642181319342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,15 +12,17 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  var d = numDate(year, month, day, hour, minute);\n-  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+  List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n+  print(tmp[0]);\n \n+  // var d = numDate(year, month, day, hour, minute);\n+  // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n   // }\n-  List bodyList = Body.values;\n-  for (var val in bodyList) {\n-    print(val.index);\n-  }\n+  // List bodyList = Body.values;\n+  // for (var val in bodyList) {\n+  //   print(val.index);\n+  // }\n }\n"
+                },
+                {
+                    "date": 1642181426006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n-  print(tmp[0]);\n+  print(tmp[0].toString());\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n"
+                },
+                {
+                    "date": 1642181436960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n-  print(tmp[0].toString());\n+  print(tmp[1]);\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n"
+                },
+                {
+                    "date": 1642303765563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n-  print(tmp[1]);\n+  print(tmp[0].latitude);\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n"
+                },
+                {
+                    "date": 1642304382839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n-  print(tmp[0].latitude);\n+  double ut = tmp[1];\n+  print(ut);\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n"
+                },
+                {
+                    "date": 1642304418349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n-  double ut = tmp[1];\n+  // List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n+  double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642304441634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  // List tmp = ParseArgs(year, month, day, hour, minute, lat, lon);\n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642304792745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import 'dart:html';\n+\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n@@ -15,8 +17,14 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n+  List bodyList = [Body.Mercury, Body.Venus];\n+\n+  for (var body in bodyList) {\n+    print(body.value);\n+  }\n+\n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642304817042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n-import 'dart:html';\n-\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n"
+                },
+                {
+                    "date": 1642304907524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.Mercury, Body.Venus];\n \n   for (var body in bodyList) {\n-    print(body.value);\n+    print(body.index);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642304950233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.Mercury, Body.Venus];\n \n   for (var body in bodyList) {\n-    print(body.index);\n+    print(body);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642304996979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  List bodyList = [Body.Mercury, Body.Venus];\n+  List bodyList = [Body];\n \n   for (var body in bodyList) {\n     print(body);\n   }\n"
+                },
+                {
+                    "date": 1642305014484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body];\n \n   for (var body in bodyList) {\n-    print(body);\n+    print(body.value);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305035993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,12 +15,12 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  List bodyList = [Body];\n+  List bodyList = [Body.values];\n \n   for (var body in bodyList) {\n-    print(body.value);\n+    print(body);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305047687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.values];\n \n   for (var body in bodyList) {\n-    print(body);\n+    print(body.value);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305058800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.values];\n \n   for (var body in bodyList) {\n-    print(body.value);\n+    print(body.index);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305075440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.values];\n \n   for (var body in bodyList) {\n-    print(body.index);\n+    print(body);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305090269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.values];\n \n   for (var body in bodyList) {\n-    print(body);\n+    print(body.index);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305172966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   List bodyList = [Body.values];\n \n-  for (var body in bodyList) {\n+  for (var body in bodyList.toList()) {\n     print(body.index);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642305179141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = [Body.values];\n \n   for (var body in bodyList.toList()) {\n-    print(body.index);\n+    print(body);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305187692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   List bodyList = [Body.values];\n \n-  for (var body in bodyList.toList()) {\n+  for (var body in bodyList) {\n     print(body);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642305209736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  List bodyList = [Body.values];\n+  List bodyList = Body.values;\n \n   for (var body in bodyList) {\n     print(body);\n   }\n"
+                },
+                {
+                    "date": 1642305224796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = Body.values;\n \n   for (var body in bodyList) {\n-    print(body);\n+    print(body.toString());\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305237301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = Body.values;\n \n   for (var body in bodyList) {\n-    print(body.toString());\n+    print(body.index);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305246546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = Body.values;\n \n   for (var body in bodyList) {\n-    print(body.index);\n+    print(body.value);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642305374026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,13 +16,15 @@\n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n   List bodyList = Body.values;\n+  bodyList.forEach((element) {\n+    print(element);\n+  });\n+  // for (var body in bodyList) {\n+  //   print(body.value);\n+  // }\n \n-  for (var body in bodyList) {\n-    print(body.value);\n-  }\n-\n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642305428453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  List bodyList = Body.values;\n+  dynamic bodyList = Body;\n   bodyList.forEach((element) {\n     print(element);\n   });\n   // for (var body in bodyList) {\n"
+                },
+                {
+                    "date": 1642305487252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  dynamic bodyList = Body;\n+  dynamic bodyList = Body.values;\n   bodyList.forEach((element) {\n     print(element);\n   });\n   // for (var body in bodyList) {\n"
+                },
+                {
+                    "date": 1642305505289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   dynamic bodyList = Body.values;\n   bodyList.forEach((element) {\n-    print(element);\n+    print(element.toString());\n   });\n   // for (var body in bodyList) {\n   //   print(body.value);\n   // }\n"
+                },
+                {
+                    "date": 1642305517276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   dynamic bodyList = Body.values;\n   bodyList.forEach((element) {\n-    print(element.toString());\n+    print(element.value);\n   });\n   // for (var body in bodyList) {\n   //   print(body.value);\n   // }\n"
+                },
+                {
+                    "date": 1642305529610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   dynamic bodyList = Body.values;\n   bodyList.forEach((element) {\n-    print(element.value);\n+    print(element.index);\n   });\n   // for (var body in bodyList) {\n   //   print(body.value);\n   // }\n"
+                },
+                {
+                    "date": 1642305632482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   dynamic bodyList = Body.values;\n   bodyList.forEach((element) {\n-    print(element.index);\n+    print(element.runtimeType);\n   });\n   // for (var body in bodyList) {\n   //   print(body.value);\n   // }\n"
+                },
+                {
+                    "date": 1642305643749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n-  dynamic bodyList = Body.values;\n+  List bodyList = Body.values;\n   bodyList.forEach((element) {\n     print(element.runtimeType);\n   });\n   // for (var body in bodyList) {\n"
+                },
+                {
+                    "date": 1642305656862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(ut);\n \n   List bodyList = Body.values;\n   bodyList.forEach((element) {\n-    print(element.runtimeType);\n+    print(element);\n   });\n   // for (var body in bodyList) {\n   //   print(body.value);\n   // }\n"
+                },
+                {
+                    "date": 1642305734193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,18 +19,11 @@\n   List bodyList = Body.values;\n   bodyList.forEach((element) {\n     print(element);\n   });\n-  // for (var body in bodyList) {\n-  //   print(body.value);\n-  // }\n \n-  // var d = numDate(year, month, day, hour, minute);\n-  // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n-  // for (var item in _domes) {\n-  //   print(item.toStringAsFixed(2));\n-  // }\n-  // List bodyList = Body.values;\n-  // for (var val in bodyList) {\n-  //   print(val.index);\n-  // }\n+  var d = numDate(year, month, day, hour, minute);\n+  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+  for (var item in _domes) {\n+    print(item.toStringAsFixed(2));\n+  }\n }\n"
+                },
+                {
+                    "date": 1642305744698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n-import 'vsop/calc_moon.dart';\n+// import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n \n void main() {\n   int year = 1977;\n"
+                },
+                {
+                    "date": 1642306770403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,14 +16,14 @@\n   double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(ut);\n \n   List bodyList = Body.values;\n-  bodyList.forEach((element) {\n-    print(element);\n+  bodyList.forEach((body) {\n+    print(HelioEclipLon(body, ut));\n   });\n \n-  var d = numDate(year, month, day, hour, minute);\n-  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n-  for (var item in _domes) {\n-    print(item.toStringAsFixed(2));\n-  }\n+  // var d = numDate(year, month, day, hour, minute);\n+  // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+  // for (var item in _domes) {\n+  //   print(item.toStringAsFixed(2));\n+  // }\n }\n"
+                },
+                {
+                    "date": 1642306976593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  double ut = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print(ut);\n+  double time = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n+  print(time);\n \n   List bodyList = Body.values;\n   bodyList.forEach((body) {\n-    print(HelioEclipLon(body, ut));\n+    print(HelioEclipLon(body, time));\n   });\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642307548932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(time);\n \n   List bodyList = Body.values;\n   bodyList.forEach((body) {\n-    print(HelioEclipLon(body, time));\n+    print(HelioEclipLon(body, time)[1]);\n   });\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642379314178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   double time = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print(time);\n+  print(Timeit);\n \n   List bodyList = Body.values;\n   bodyList.forEach((body) {\n     print(HelioEclipLon(body, time)[1]);\n"
+                },
+                {
+                    "date": 1642379795302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(Timeit);\n \n   List bodyList = Body.values;\n   bodyList.forEach((body) {\n-    print(HelioEclipLon(body, time)[1]);\n+    print(HelioEclipLon(body, time));\n   });\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642379872854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n-import 'vsop/src/func.dart';\n-import 'vsop/domes.dart';\n+// import 'vsop/src/func.dart';\n+// import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n // import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n \n@@ -16,11 +16,11 @@\n   double time = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(Timeit);\n \n   List bodyList = Body.values;\n-  bodyList.forEach((body) {\n+  for (var body in bodyList) {\n     print(HelioEclipLon(body, time));\n-  });\n+  }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   // for (var item in _domes) {\n"
+                },
+                {
+                    "date": 1642380376359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  double time = ParseArgs(year, month, day, hour, minute, lat, lon)[1];\n+  double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n   print(Timeit);\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(HelioEclipLon(body, time));\n+    print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642381467264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   print(Timeit);\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(helioEclipLon(body, time));\n+    print(HelioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642381483713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print(Timeit);\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(HelioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642398750649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(HelioEclipLon(body, time));\n+    print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642401671994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(helioEclipLon(body, time));\n+    print(helioEclipLon(body, time).x);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642401689785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(helioEclipLon(body, time).x);\n+    print(helioEclipLon(body, time).y);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642401696564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(helioEclipLon(body, time).y);\n+    print(helioEclipLon(body, time).z);\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642402098247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(helioEclipLon(body, time).z);\n+    print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642402288592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n   double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n+    print(body);\n     print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642479787130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  double time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n+  Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time));\n+    print(helioEclipLon(body, time.ut));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642479837687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time.ut));\n+    print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642479853747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time));\n+    print(helioEclipLon(body, time.ut));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642480017605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-\n+  print(time.ut);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time.ut));\n"
+                },
+                {
+                    "date": 1642480132680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print(time.ut);\n+  print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time.ut));\n"
+                },
+                {
+                    "date": 1642480218334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,13 +13,13 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print(time.tt);\n+  // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time.ut));\n+    print(helioEclipLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642566919930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time));\n+    // print(helioEclipLon(body, time));\n+    print(GeoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642568168912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     // print(helioEclipLon(body, time));\n-    print(GeoLon(body, time));\n+    print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642568325562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  // print(time.tt);\n+\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642568585087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    // print(helioEclipLon(body, time));\n+    print(helioEclipLon(body, time));\n     print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642568618385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,14 +13,14 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-\n+  // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time));\n-    print(geoLon(body, time));\n+    // print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642569918974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time));\n-    // print(geoLon(body, time));\n+    print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642577075524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time));\n-    print(geoLon(body, time));\n+    // print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642577148777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n     print(helioEclipLon(body, time));\n-    // print(geoLon(body, time));\n+    print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642577157212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time));\n+    // print(helioEclipLon(body, time));\n     print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642577758710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    // print(helioEclipLon(body, time));\n-    print(geoLon(body, time));\n+    print(helioEclipLon(body, time));\n+    // print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642577852213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     print(body);\n-    print(helioEclipLon(body, time));\n-    // print(geoLon(body, time));\n+    // print(helioEclipLon(body, time));\n+    print(geoLon(body, time));\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642614987188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n // import 'vsop/src/func.dart';\n // import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n-// import 'vsop/calc_moon.dart';\n+import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n \n void main() {\n   int year = 1977;\n@@ -16,11 +16,15 @@\n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n-    print(body);\n-    // print(helioEclipLon(body, time));\n-    print(geoLon(body, time));\n+    if (body == Body.moon) {\n+      return geoMoon(tt);\n+    } else {\n+      print(body);\n+      // print(helioEclipLon(body, time));\n+      print(geoLon(body, time));\n+    }\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n   // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n"
+                },
+                {
+                    "date": 1642615052484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      return geoMoon(tt);\n+      print(geoMoon(time.tt));\n     } else {\n       print(body);\n       // print(helioEclipLon(body, time));\n       print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642616207283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n // import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n+import 'vsop/src/rotateVector.dart';\n \n void main() {\n   int year = 1977;\n   int month = 5;\n@@ -17,9 +18,11 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      print(geoMoon(time.tt));\n+      Vector geoM1 = geoMoon(time.ut);\n+      var geoM = ecliptic(geoM1, time.ut);\n+      print(geoM.elon);\n     } else {\n       print(body);\n       // print(helioEclipLon(body, time));\n       print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642616315649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM1 = geoMoon(time.ut);\n       var geoM = ecliptic(geoM1, time.ut);\n+      print(body);\n       print(geoM.elon);\n     } else {\n       print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642616336624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n void main() {\n   int year = 1977;\n   int month = 5;\n-  int day = 27;\n+  int day = 28;\n   int hour = 16;\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n"
+                },
+                {
+                    "date": 1642616360728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n void main() {\n   int year = 1977;\n   int month = 5;\n-  int day = 28;\n+  int day = 27;\n   int hour = 16;\n   int minute = 52;\n   double lat = 42.9;\n   double lon = 74.6;\n"
+                },
+                {
+                    "date": 1642646847526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,12 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM1 = geoMoon(time.ut);\n-      var geoM = ecliptic(geoM1, time.ut);\n+      Vector geoM = geoMoon(time.ut);\n+      var moon = ecliptic(geoM, time.ut);\n       print(body);\n-      print(geoM.elon);\n+      print(moon.elon);\n     } else {\n       print(body);\n       // print(helioEclipLon(body, time));\n       print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642647141835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n // import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n-import 'vsop/src/rotateVector.dart';\n+import 'vsop/src/rotate_vector.dart';\n \n void main() {\n   int year = 1977;\n   int month = 5;\n"
+                },
+                {
+                    "date": 1642647594665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n       print(moon.elon);\n     } else {\n       print(body);\n       // print(helioEclipLon(body, time));\n-      print(geoLon(body, time));\n+      // print(geoLon(body, time));\n     }\n   }\n \n   // var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642647632496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n       var moon = ecliptic(geoM, time.ut);\n       print(body);\n       print(moon.elon);\n     } else {\n-      print(body);\n+      print('');\n+      // print(body);\n       // print(helioEclipLon(body, time));\n       // print(geoLon(body, time));\n     }\n   }\n"
+                },
+                {
+                    "date": 1642647644372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n       var moon = ecliptic(geoM, time.ut);\n       print(body);\n       print(moon.elon);\n     } else {\n-      print('');\n       // print(body);\n       // print(helioEclipLon(body, time));\n       // print(geoLon(body, time));\n     }\n"
+                },
+                {
+                    "date": 1642657468711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1947;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642657522595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1947;\n+  int year = 1997;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642657872700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1997;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642662373307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,10 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM = geoMoon(time.ut);\n-      var moon = ecliptic(geoM, time.ut);\n+      Vector geoM = geoMoon(time.tt);\n+      var moon = ecliptic(geoM, time.tt);\n       print(body);\n       print(moon.elon);\n     } else {\n       // print(body);\n"
+                },
+                {
+                    "date": 1642662938983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1997;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642662959296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1997;\n+  int year = 1907;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642666267852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1907;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642669279998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1907;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642669333576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1907;\n+  int year = 1997;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642669368508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1997;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642689364420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1997;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642689414656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1997;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642750444138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1997;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642750470492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1997;\n+  int year = 1907;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642750479072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1907;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642763966011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM = geoMoon(time.tt);\n+      Vector geoM = geoMoon(time.ut);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n       print(moon.elon);\n     } else {\n"
+                },
+                {
+                    "date": 1642763984798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   // print(time.tt);\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM = geoMoon(time.ut);\n+      Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n       print(moon.elon);\n     } else {\n"
+                },
+                {
+                    "date": 1642764380216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n+      print(geoM.x);\n       print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642764444155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      print(geoM.x);\n+      print(geoM.y);\n       print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642764456615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      print(geoM.y);\n+      print(geoM.z);\n       print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642764471975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      print(geoM.z);\n+      print(geoM.t);\n       print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642764490543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      print(geoM.t);\n       print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n"
+                },
+                {
+                    "date": 1642764976515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  // print(time.tt);\n+  print('${time.tt} ${time.ut}');\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642764991155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print('${time.tt} ${time.ut}');\n+  print('${time.tt} ${time.ut}/n');\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642765000425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print('${time.tt} ${time.ut}/n');\n+  print('${time.tt} ${time.ut}\\n');\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642765115658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print('${time.tt} ${time.ut}\\n');\n+  // print('${time.tt} ${time.ut}\\n');\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642768537072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  // print('${time.tt} ${time.ut}\\n');\n+  print('${time.tt} ${time.ut}\\n');\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642768622987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n-  print('${time.tt} ${time.ut}\\n');\n+\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       Vector geoM = geoMoon(time.tt);\n"
+                },
+                {
+                    "date": 1642769559857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM = geoMoon(time.tt);\n+      double geoM = geoMoon(time.tt);\n       var moon = ecliptic(geoM, time.tt);\n       print(body);\n       print(moon.elon);\n     } else {\n"
+                },
+                {
+                    "date": 1642769615862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,12 @@\n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       double geoM = geoMoon(time.tt);\n-      var moon = ecliptic(geoM, time.tt);\n+      // var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      print(moon.elon);\n+      // print(moon.elon);\n+      print(geoM);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n       // print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642769664896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,13 +18,12 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      double geoM = geoMoon(time.tt);\n-      // var moon = ecliptic(geoM, time.tt);\n+      Vector geoM = geoMoon(time.tt);\n+      var moon = ecliptic(geoM, time.tt);\n       print(body);\n-      // print(moon.elon);\n-      print(geoM);\n+      print(moon.elon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n       // print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642770469112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,13 @@\n \n   List bodyList = Body.values;\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      Vector geoM = geoMoon(time.tt);\n-      var moon = ecliptic(geoM, time.tt);\n+      // Vector geoM = geoMoon(time.tt)[0];\n+      // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n+      var moon = geoMoon(time.tt)[1]; // более точный расчет\n       print(body);\n-      print(moon.elon);\n+      print(moon);\n     } else {\n       // print(body);\n       // print(helioEclipLon(body, time));\n       // print(geoLon(body, time));\n"
+                },
+                {
+                    "date": 1642827161588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n // import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n-import 'vsop/src/rotate_vector.dart';\n+// import 'vsop/src/rotate_vector.dart';\n \n void main() {\n   int year = 1977;\n   int month = 5;\n"
+                },
+                {
+                    "date": 1642827167416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n // import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1977;\n+  int year = 1907;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642827335042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n-// import 'vsop/src/func.dart';\n-// import 'vsop/domes.dart';\n+import 'vsop/src/func.dart';\n+import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n // import 'vsop/src/rotate_vector.dart';\n@@ -24,16 +24,16 @@\n       var moon = geoMoon(time.tt)[1]; // более точный расчет\n       print(body);\n       print(moon);\n     } else {\n-      // print(body);\n-      // print(helioEclipLon(body, time));\n-      // print(geoLon(body, time));\n+      print(body);\n+      print(helioEclipLon(body, time));\n+      print(geoLon(body, time));\n     }\n   }\n \n-  // var d = numDate(year, month, day, hour, minute);\n-  // var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n-  // for (var item in _domes) {\n-  //   print(item.toStringAsFixed(2));\n-  // }\n+  var d = numDate(year, month, day, hour, minute);\n+  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+  for (var item in _domes) {\n+    print(item.toStringAsFixed(2));\n+  }\n }\n"
+                },
+                {
+                    "date": 1642827437666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n // import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1907;\n+  int year = 1807;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642827479529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'vsop/src/classes.dart';\n // import 'vsop/src/rotate_vector.dart';\n \n void main() {\n-  int year = 1807;\n+  int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n"
+                },
+                {
+                    "date": 1642827712710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,16 +22,16 @@\n       // Vector geoM = geoMoon(time.tt)[0];\n       // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n       var moon = geoMoon(time.tt)[1]; // более точный расчет\n       print(body);\n-      print(moon);\n+      print('Гео - $moon');\n     } else {\n       print(body);\n-      print(helioEclipLon(body, time));\n-      print(geoLon(body, time));\n+      print('Гелио - ${helioEclipLon(body, time)}');\n+      print('Гео - ${geoLon(body, time)}');\n     }\n   }\n-\n+  print('');\n   var d = numDate(year, month, day, hour, minute);\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642827943563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n import 'vsop/src/classes.dart';\n // import 'vsop/src/rotate_vector.dart';\n \n void main() {\n+  final stopwatch = Stopwatch()..start();\n+\n   int year = 1977;\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n"
+                },
+                {
+                    "date": 1642827963956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,5 +37,6 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n+  print('doSomething() executed in ${stopwatch.elapsed}');\n }\n"
+                },
+                {
+                    "date": 1642827981378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-  print('doSomething() executed in ${stopwatch.elapsed}');\n+  print('Время выполнения ${stopwatch.elapsed}');\n }\n"
+                },
+                {
+                    "date": 1642828113831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-  print('Время выполнения ${stopwatch.elapsed}');\n+  print('Время выполнения ${stopwatch.elapsedMilliseconds}');\n }\n"
+                },
+                {
+                    "date": 1642828145426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-  print('Время выполнения ${stopwatch.elapsedMilliseconds}');\n+  print('Время выполнения ${stopwatch.elapsedMilliseconds * 1000}');\n }\n"
+                },
+                {
+                    "date": 1642828155637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-  print('Время выполнения ${stopwatch.elapsedMilliseconds * 1000}');\n+  print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000}');\n }\n"
+                },
+                {
+                    "date": 1642828220987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,7 @@\n   var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n   for (var item in _domes) {\n     print(item.toStringAsFixed(2));\n   }\n-  print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000}');\n+  print('');\n+  print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n }\n"
+                },
+                {
+                    "date": 1642828365280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,26 +18,29 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (var body in bodyList) {\n-    if (body == Body.moon) {\n-      // Vector geoM = geoMoon(time.tt)[0];\n-      // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n-      var moon = geoMoon(time.tt)[1]; // более точный расчет\n-      print(body);\n-      print('Гео - $moon');\n-    } else {\n-      print(body);\n-      print('Гелио - ${helioEclipLon(body, time)}');\n-      print('Гео - ${geoLon(body, time)}');\n+  for (int i = 0; i <= 1000; i++) {\n+    for (var body in bodyList) {\n+      if (body == Body.moon) {\n+        // Vector geoM = geoMoon(time.tt)[0];\n+        // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n+        var moon = geoMoon(time.tt)[1]; // более точный расчет\n+        print(body);\n+        print('Гео - $moon');\n+      } else {\n+        print(body);\n+        print('Гелио - ${helioEclipLon(body, time)}');\n+        print('Гео - ${geoLon(body, time)}');\n+      }\n     }\n+    print('');\n+    var d = numDate(year, month, day, hour, minute);\n+    var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+    for (var item in _domes) {\n+      print(item.toStringAsFixed(2));\n+    }\n   }\n+\n   print('');\n-  var d = numDate(year, month, day, hour, minute);\n-  var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n-  for (var item in _domes) {\n-    print(item.toStringAsFixed(2));\n-  }\n-  print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n }\n"
+                },
+                {
+                    "date": 1642828410956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,21 +24,21 @@\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        print(body);\n-        print('Гео - $moon');\n+        // print(body);\n+        // print('Гео - $moon');\n       } else {\n-        print(body);\n-        print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${geoLon(body, time)}');\n+        // print(body);\n+        // print('Гелио - ${helioEclipLon(body, time)}');\n+        // print('Гео - ${geoLon(body, time)}');\n       }\n     }\n     print('');\n     var d = numDate(year, month, day, hour, minute);\n     var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n     for (var item in _domes) {\n-      print(item.toStringAsFixed(2));\n+      // print(item.toStringAsFixed(2));\n     }\n   }\n \n   print('');\n"
+                },
+                {
+                    "date": 1642828425502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         // print('Гео - ${geoLon(body, time)}');\n       }\n     }\n-    print('');\n+    // print('');\n     var d = numDate(year, month, day, hour, minute);\n     var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n     for (var item in _domes) {\n       // print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642828450150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1000; i++) {\n+  for (int i = 0; i <= 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828459516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1; i++) {\n+  for (int i = 0; i <= 10; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828466268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 10; i++) {\n+  for (int i = 0; i <= 1000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828474862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1000; i++) {\n+  for (int i = 0; i <= 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828583814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1; i++) {\n+  for (int i = 0; i <= 100; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828590947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 100; i++) {\n+  for (int i = 0; i <= 10000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828600187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 10000; i++) {\n+  for (int i = 0; i <= 1000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828608649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1000; i++) {\n+  for (int i = 0; i <= 1000000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642828881129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1000000; i++) {\n+  for (int i = 0; i <= 10000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642832128589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 10000; i++) {\n+  for (int i = 0; i <= 100000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642858168839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 100000; i++) {\n+  for (int i = 0; i <= 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n@@ -29,9 +29,9 @@\n         // print('Гео - $moon');\n       } else {\n         // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n-        // print('Гео - ${geoLon(body, time)}');\n+        print('Гео - ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642858213963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n   Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i <= 1; i++) {\n+  for (int i = 0; i < 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         // Vector geoM = geoMoon(time.tt)[0];\n         // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n"
+                },
+                {
+                    "date": 1642858273102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         // print('Гео - $moon');\n       } else {\n         // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${geoLon(body, time)}');\n+        print('Гео - ${body.value} ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642858290757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         // print('Гео - $moon');\n       } else {\n         // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${body.value} ${geoLon(body, time)}');\n+        print('Гео - ${body.toString()} ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642858304300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         // print('Гео - $moon');\n       } else {\n         // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${body.toString()} ${geoLon(body, time)}');\n+        print('Гео - ${body} ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642860031556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,10 +21,8 @@\n   List bodyList = Body.values;\n   for (int i = 0; i < 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n-        // Vector geoM = geoMoon(time.tt)[0];\n-        // var moonVec = ecliptic(geoM, time.tt); //Векторный расчет\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n"
+                },
+                {
+                    "date": 1642860080443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,10 @@\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n-        // print(body);\n-        // print('Гелио - ${helioEclipLon(body, time)}');\n+        print(body);\n+        print('Гелио - ${helioEclipLon(body, time)}');\n         print('Гео - ${body} ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n"
+                },
+                {
+                    "date": 1642860108382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         // print('Гео - $moon');\n       } else {\n         print(body);\n         print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${body} ${geoLon(body, time)}');\n+        print('Гео - ${geoLon(body, time)}');\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642860298607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,10 @@\n   for (int i = 0; i < 1; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        // print(body);\n-        // print('Гео - $moon');\n+        print(body);\n+        print('Гео - $moon');\n       } else {\n         print(body);\n         print('Гелио - ${helioEclipLon(body, time)}');\n         print('Гео - ${geoLon(body, time)}');\n@@ -34,9 +34,9 @@\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n     var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n     for (var item in _domes) {\n-      // print(item.toStringAsFixed(2));\n+      print(item.toStringAsFixed(2));\n     }\n   }\n \n   print('');\n"
+                },
+                {
+                    "date": 1642861264044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,17 @@\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         print(body);\n         print('Гео - $moon');\n       } else {\n-        print(body);\n-        print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${geoLon(body, time)}');\n+        if (body == Body.sun) {\n+          print(body);\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          print('Гео - ${geoLon(Body.earth, time)}');\n+        } else {\n+          print(body);\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          print('Гео - ${geoLon(body, time)}');\n+        }\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n"
+                },
+                {
+                    "date": 1642861304685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${geoLon(Body.earth, time)}');\n+          print('Гео - ${helioEclipLon(Body.earth, time)}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n"
+                },
+                {
+                    "date": 1642861342859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${helioEclipLon(Body.earth, time)}');\n+          print('Гео - ${deg_360(helioEclipLon(Body.earth, time))}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n"
+                },
+                {
+                    "date": 1642861352163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg_360(helioEclipLon(Body.earth, time))}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time))}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n"
+                },
+                {
+                    "date": 1642861386267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time))}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time) + 180)}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n"
+                },
+                {
+                    "date": 1642861417547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time) + 180)}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n"
+                },
+                {
+                    "date": 1642862219834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,13 @@\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n+  DateTime dat = DateTime(year, month, day, hour, minute);\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  Timeit time = parseArgs(year, month, day, hour, minute, lat, lon)[1];\n+  Timeit time = parseArgs(dat, lat, lon)[1];\n \n   List bodyList = Body.values;\n   for (int i = 0; i < 1; i++) {\n     for (var body in bodyList) {\n"
+                },
+                {
+                    "date": 1642862299970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n-  DateTime dat = DateTime(year, month, day, hour, minute);\n+  DateTime dat = DateTime.utc(year, month, day, hour, minute);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(dat, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642862528840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n-  DateTime dat = DateTime.utc(year, month, day, hour, minute);\n+  DateTime dat = DateTime.utc(1977, month, day, hour, minute);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(dat, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642862573421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   int month = 5;\n   int day = 27;\n   int hour = 16;\n   int minute = 52;\n-  DateTime dat = DateTime.utc(1977, month, day, hour, minute);\n+  DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(dat, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642863023715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n       }\n     }\n     // print('');\n     var d = numDate(year, month, day, hour, minute);\n-    var _domes = domes(year, month, day, hour, minute, lat, lon, d);\n+    var _domes = domes(dat, lat, lon, d);\n     for (var item in _domes) {\n       print(item.toStringAsFixed(2));\n     }\n   }\n"
+                },
+                {
+                    "date": 1642863219323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n         }\n       }\n     }\n     // print('');\n-    var d = numDate(year, month, day, hour, minute);\n+    var d = numDate(dat);\n     var _domes = domes(dat, lat, lon, d);\n     for (var item in _domes) {\n       print(item.toStringAsFixed(2));\n     }\n"
+                },
+                {
+                    "date": 1642863387069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,13 +7,8 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  int year = 1977;\n-  int month = 5;\n-  int day = 27;\n-  int hour = 16;\n-  int minute = 52;\n   DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n@@ -38,10 +33,10 @@\n         }\n       }\n     }\n     // print('');\n-    var d = numDate(dat);\n-    var _domes = domes(dat, lat, lon, d);\n+    var dt = numDate(dat);\n+    var _domes = domes(dat, lat, lon, dt);\n     for (var item in _domes) {\n       print(item.toStringAsFixed(2));\n     }\n   }\n"
+                },
+                {
+                    "date": 1642864607830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,16 +7,18 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime dat = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 30, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n-  Timeit time = parseArgs(dat, lat, lon)[1];\n+  Timeit time = parseArgs(data, lat, lon)[1];\n \n   List bodyList = Body.values;\n-  for (int i = 0; i < 1; i++) {\n+  while (data.isBefore(dataNext)) {\n+    data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         print(body);\n@@ -33,10 +35,10 @@\n         }\n       }\n     }\n     // print('');\n-    var dt = numDate(dat);\n-    var _domes = domes(dat, lat, lon, dt);\n+    var dt = numDate(data);\n+    var _domes = domes(data, lat, lon, dt);\n     for (var item in _domes) {\n       print(item.toStringAsFixed(2));\n     }\n   }\n"
+                },
+                {
+                    "date": 1642864678485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 30, 16, 52);\n+  DateTime dataNext = DateTime.utc(1987, 5, 327, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n@@ -20,29 +20,29 @@\n     data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        print(body);\n-        print('Гео - $moon');\n+        // print(body);\n+        // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n-          print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          // print(body);\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n-          print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${geoLon(body, time)}');\n+          // print(body);\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n     for (var item in _domes) {\n-      print(item.toStringAsFixed(2));\n+      // print(item.toStringAsFixed(2));\n     }\n   }\n \n-  print('');\n+  // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n }\n"
+                },
+                {
+                    "date": 1642864737157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1987, 5, 327, 16, 52);\n+  DateTime dataNext = DateTime.utc(1987, 5, 27, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642864804484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1987, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 29, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n@@ -34,9 +34,9 @@\n           // print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n-    // print('');\n+    print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n     for (var item in _domes) {\n       // print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642864825106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // print(body);\n-        // print('Гео - $moon');\n+        print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n@@ -34,9 +34,9 @@\n           // print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n-    print('');\n+    // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n     for (var item in _domes) {\n       // print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1642864842039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 29, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 27, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642864901244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 1, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642864909801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 1, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642865001059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,11 @@\n     }\n     // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n-    for (var item in _domes) {\n-      // print(item.toStringAsFixed(2));\n-    }\n+    // for (var item in _domes) {\n+    //   print(item.toStringAsFixed(2));\n+    // }\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642865236329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n import 'vsop/src/classes.dart';\n-// import 'vsop/src/rotate_vector.dart';\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n@@ -20,28 +19,28 @@\n     data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        // print(body);\n+        print(body);\n         print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n-          // print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          print(body);\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n-          // print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${geoLon(body, time)}');\n+          print(body);\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n-    // for (var item in _domes) {\n-    //   print(item.toStringAsFixed(2));\n-    // }\n+    for (var item in _domes) {\n+      print(item.toStringAsFixed(2));\n+    }\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642865364370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,13 +10,14 @@\n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n   DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n+  List bodyList = Body.values;\n \n+\n   Timeit time = parseArgs(data, lat, lon)[1];\n \n-  List bodyList = Body.values;\n-  while (data.isBefore(dataNext)) {\n+  \n     data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1642865383785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,11 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n+  while (data.isBefore(dataNext)) {\n+    Timeit time = parseArgs(data, lat, lon)[1];\n \n-  Timeit time = parseArgs(data, lat, lon)[1];\n-\n-  \n     data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1642865415937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,17 +7,17 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 1, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n   while (data.isBefore(dataNext)) {\n+    data = data.add(Duration(days: 1));\n+\n     Timeit time = parseArgs(data, lat, lon)[1];\n-\n-    data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         print(body);\n"
+                },
+                {
+                    "date": 1642865425268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 1, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865507110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n+  DateTime data = DateTime(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime(1977, 6, 11, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865603079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime(1977, 6, 11, 16, 52);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865650983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 11, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 8, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865665867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 8, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 7, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865680037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 7, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865690612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 2, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865707728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 2, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 3, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865716113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 3, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642865729201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1977, 5, 31, 16, 52);\n   DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n"
+                },
+                {
+                    "date": 1642865770566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 31, 16, 52);\n+  DateTime data = DateTime.utc(1977, 6, 3, 16, 52);\n   DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n"
+                },
+                {
+                    "date": 1642865900590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,13 +34,13 @@\n         }\n       }\n     }\n     // print('');\n-    var dt = numDate(data);\n-    var _domes = domes(data, lat, lon, dt);\n-    for (var item in _domes) {\n-      print(item.toStringAsFixed(2));\n-    }\n+    // var dt = numDate(data);\n+    // var _domes = domes(data, lat, lon, dt);\n+    // for (var item in _domes) {\n+    //   print(item.toStringAsFixed(2));\n+    // }\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642865924510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         }\n       }\n     }\n     // print('');\n-    // var dt = numDate(data);\n+    var dt = numDate(data);\n     // var _domes = domes(data, lat, lon, dt);\n     // for (var item in _domes) {\n     //   print(item.toStringAsFixed(2));\n     // }\n"
+                },
+                {
+                    "date": 1642865949834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       }\n     }\n     // print('');\n     var dt = numDate(data);\n-    // var _domes = domes(data, lat, lon, dt);\n+    var _domes = domes(data, lat, lon, dt);\n     // for (var item in _domes) {\n     //   print(item.toStringAsFixed(2));\n     // }\n   }\n"
+                },
+                {
+                    "date": 1642867082326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 6, 3, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 4, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 4, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642867315100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,11 +36,11 @@\n     }\n     // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n-    // for (var item in _domes) {\n-    //   print(item.toStringAsFixed(2));\n-    // }\n+    for (var item in _domes) {\n+      print(item.toStringAsFixed(2));\n+    }\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642868164608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 6, 3, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 4, 15, 52);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 6, 27, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642868232787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1907, 5, 27, 16, 52);\n   DateTime dataNext = DateTime.utc(1977, 6, 27, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n"
+                },
+                {
+                    "date": 1642868689302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,19 +18,19 @@\n \n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n-        var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        print(body);\n-        print('Гео - $moon');\n+        // var moon = geoMoon(time.tt)[1]; // более точный расчет\n+        // print(body);\n+        // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n"
+                },
+                {
+                    "date": 1642868767195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,14 +24,14 @@\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${geoLon(body, time)}');\n+          print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n"
+                },
+                {
+                    "date": 1642868823784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,13 +25,13 @@\n       } else {\n         if (body == Body.sun) {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           print(body);\n           print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${geoLon(body, time)}');\n+          print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n"
+                },
+                {
+                    "date": 1642868955446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,15 +23,19 @@\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n-          print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          helioEclipLon(body, time);\n+          deg360(helioEclipLon(Body.earth, time) - 180);\n+          // print(body);\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n-          print(body);\n-          print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${geoLon(body, time)}');\n+          helioEclipLon(body, time);\n+          geoLon(body, time);\n+          // print(body);\n+          // print('Гелио - ${helioEclipLon(body, time)}');\n+          // print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n"
+                },
+                {
+                    "date": 1642868983833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,11 +40,11 @@\n     }\n     // print('');\n     var dt = numDate(data);\n     var _domes = domes(data, lat, lon, dt);\n-    for (var item in _domes) {\n-      print(item.toStringAsFixed(2));\n-    }\n+    // for (var item in _domes) {\n+    //   print(item.toStringAsFixed(2));\n+    // }\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642868998768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n-        // var moon = geoMoon(time.tt)[1]; // более точный расчет\n+        var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n"
+                },
+                {
+                    "date": 1642870331484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import 'dart:io';\n+\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n@@ -12,8 +14,10 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n+  var myFile = File('file.txt');\n+\n   while (data.isBefore(dataNext)) {\n     data = data.add(Duration(days: 1));\n \n     Timeit time = parseArgs(data, lat, lon)[1];\n"
+                },
+                {
+                    "date": 1642871423868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n-  var myFile = File('file.txt');\n+  File file = File('file.txt');\n \n   while (data.isBefore(dataNext)) {\n     data = data.add(Duration(days: 1));\n \n"
+                },
+                {
+                    "date": 1642871447279,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1907, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 6, 27, 15, 52);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1997, 6, 27, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642871458776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1907, 5, 27, 16, 52);\n   DateTime dataNext = DateTime.utc(1997, 6, 27, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n"
+                },
+                {
+                    "date": 1642871554157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,20 +23,26 @@\n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n+        file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           helioEclipLon(body, time);\n           deg360(helioEclipLon(Body.earth, time) - 180);\n+          file.writeAsStringSync(\n+              \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n+              mode: FileMode.append);\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n           // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           helioEclipLon(body, time);\n           geoLon(body, time);\n+          file.writeAsStringSync(\"${geoLon(body, time)}\",\n+              mode: FileMode.append);\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n           // print('Гео - ${geoLon(body, time)}');\n         }\n"
+                },
+                {
+                    "date": 1642872283161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,15 +8,16 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1907, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n   DateTime dataNext = DateTime.utc(1997, 6, 27, 15, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n   File file = File('file.txt');\n+  file.writeAsStringSync(\"\");\n \n   while (data.isBefore(dataNext)) {\n     data = data.add(Duration(days: 1));\n \n"
+                },
+                {
+                    "date": 1642906694308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1997, 6, 27, 15, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 27, 16, 53);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642906745597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,36 +14,36 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n-  File file = File('file.txt');\n-  file.writeAsStringSync(\"\");\n+  // File file = File('file.txt');\n+  // file.writeAsStringSync(\"\");\n \n   while (data.isBefore(dataNext)) {\n     data = data.add(Duration(days: 1));\n \n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n+        // file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n         // print(body);\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           helioEclipLon(body, time);\n           deg360(helioEclipLon(Body.earth, time) - 180);\n-          file.writeAsStringSync(\n-              \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n-              mode: FileMode.append);\n+          // file.writeAsStringSync(\n+          //     \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n+          //     mode: FileMode.append);\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n+          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           helioEclipLon(body, time);\n           geoLon(body, time);\n-          file.writeAsStringSync(\"${geoLon(body, time)}\",\n-              mode: FileMode.append);\n+          // file.writeAsStringSync(\"${geoLon(body, time)}\",\n+          //     mode: FileMode.append);\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n           // print('Гео - ${geoLon(body, time)}');\n         }\n"
+                },
+                {
+                    "date": 1642906785838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n           // file.writeAsStringSync(\"${geoLon(body, time)}\",\n           //     mode: FileMode.append);\n           // print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n-          // print('Гео - ${geoLon(body, time)}');\n+          print('Гео - ${geoLon(body, time)}');\n         }\n       }\n     }\n     // print('');\n"
+                },
+                {
+                    "date": 1642906837859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n           helioEclipLon(body, time);\n           geoLon(body, time);\n           // file.writeAsStringSync(\"${geoLon(body, time)}\",\n           //     mode: FileMode.append);\n-          // print(body);\n+          print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${geoLon(body, time)}');\n         }\n       }\n"
+                },
+                {
+                    "date": 1642906871801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n           deg360(helioEclipLon(Body.earth, time) - 180);\n           // file.writeAsStringSync(\n           //     \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n           //     mode: FileMode.append);\n-          // print(body);\n+          print(body);\n           // print('Гелио - ${helioEclipLon(body, time)}');\n           print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n         } else {\n           helioEclipLon(body, time);\n"
+                },
+                {
+                    "date": 1642906915927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         // print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           helioEclipLon(body, time);\n-          deg360(helioEclipLon(Body.earth, time) - 180);\n+          deg360(helioEclipLon(Body.earth, time) + 180);\n           // file.writeAsStringSync(\n           //     \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n           //     mode: FileMode.append);\n           print(body);\n"
+                },
+                {
+                    "date": 1642906963614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime data = DateTime.utc(1977, 5, 26, 16, 52);\n   DateTime dataNext = DateTime.utc(1977, 5, 27, 16, 53);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n"
+                },
+                {
+                    "date": 1642907058543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,10 @@\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n-        // print(body);\n-        // print('Гео - $moon');\n+        print(body);\n+        print('Гео - $moon');\n       } else {\n         if (body == Body.sun) {\n           helioEclipLon(body, time);\n           deg360(helioEclipLon(Body.earth, time) + 180);\n"
+                },
+                {
+                    "date": 1642907140039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,20 +8,18 @@\n \n void main() {\n   final stopwatch = Stopwatch()..start();\n \n-  DateTime data = DateTime.utc(1977, 5, 26, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 27, 16, 53);\n+  DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 27, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n   // File file = File('file.txt');\n   // file.writeAsStringSync(\"\");\n \n   while (data.isBefore(dataNext)) {\n-    data = data.add(Duration(days: 1));\n-\n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         var moon = geoMoon(time.tt)[1]; // более точный расчет\n@@ -54,8 +52,9 @@\n     var _domes = domes(data, lat, lon, dt);\n     // for (var item in _domes) {\n     //   print(item.toStringAsFixed(2));\n     // }\n+    data = data.add(Duration(days: 1));\n   }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n"
+                },
+                {
+                    "date": 1642907151262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 27, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642907176972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   while (data.isBefore(dataNext)) {\n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n-        var moon = geoMoon(time.tt)[1]; // более точный расчет\n+        var moon = geoMoon(time.ut)[1]; // более точный расчет\n         // file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n         print(body);\n         print('Гео - $moon');\n       } else {\n"
+                },
+                {
+                    "date": 1642907188716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   while (data.isBefore(dataNext)) {\n     Timeit time = parseArgs(data, lat, lon)[1];\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n-        var moon = geoMoon(time.ut)[1]; // более точный расчет\n+        var moon = geoMoon(time.tt)[1]; // более точный расчет\n         // file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n         print(body);\n         print('Гео - $moon');\n       } else {\n"
+                },
+                {
+                    "date": 1642907505273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,48 +14,36 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n-  // File file = File('file.txt');\n-  // file.writeAsStringSync(\"\");\n-\n-  while (data.isBefore(dataNext)) {\n-    Timeit time = parseArgs(data, lat, lon)[1];\n-    for (var body in bodyList) {\n-      if (body == Body.moon) {\n-        var moon = geoMoon(time.tt)[1]; // более точный расчет\n-        // file.writeAsStringSync(\"$moon\", mode: FileMode.append);\n+  Timeit time = parseArgs(data, lat, lon)[1];\n+  for (var body in bodyList) {\n+    if (body == Body.moon) {\n+      var moon = geoMoon(time.tt)[1]; // более точный расчет\n+      print(body);\n+      print('Гео - $moon');\n+    } else {\n+      if (body == Body.sun) {\n+        helioEclipLon(body, time);\n+        deg360(helioEclipLon(Body.earth, time) + 180);\n         print(body);\n-        print('Гео - $moon');\n+        // print('Гелио - ${helioEclipLon(body, time)}');\n+        print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n       } else {\n-        if (body == Body.sun) {\n-          helioEclipLon(body, time);\n-          deg360(helioEclipLon(Body.earth, time) + 180);\n-          // file.writeAsStringSync(\n-          //     \"${deg360(helioEclipLon(Body.earth, time) - 180)}\",\n-          //     mode: FileMode.append);\n-          print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n-        } else {\n-          helioEclipLon(body, time);\n-          geoLon(body, time);\n-          // file.writeAsStringSync(\"${geoLon(body, time)}\",\n-          //     mode: FileMode.append);\n-          print(body);\n-          // print('Гелио - ${helioEclipLon(body, time)}');\n-          print('Гео - ${geoLon(body, time)}');\n-        }\n+        helioEclipLon(body, time);\n+        geoLon(body, time);\n+        print(body);\n+        // print('Гелио - ${helioEclipLon(body, time)}');\n+        print('Гео - ${geoLon(body, time)}');\n       }\n     }\n-    // print('');\n-    var dt = numDate(data);\n-    var _domes = domes(data, lat, lon, dt);\n-    // for (var item in _domes) {\n-    //   print(item.toStringAsFixed(2));\n-    // }\n-    data = data.add(Duration(days: 1));\n   }\n+  // print('');\n+  var dt = numDate(data);\n+  var _domes = domes(data, lat, lon, dt);\n+  // for (var item in _domes) {\n+  //   print(item.toStringAsFixed(2));\n+  // }\n \n   // print('');\n   print('Время выполнения ${stopwatch.elapsedMilliseconds / 1000} секунд');\n }\n"
+                },
+                {
+                    "date": 1642908114028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n   Timeit time = parseArgs(data, lat, lon)[1];\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n-      var moon = geoMoon(time.tt)[1]; // более точный расчет\n+      var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n       print('Гео - $moon');\n     } else {\n       if (body == Body.sun) {\n"
+                },
+                {
+                    "date": 1642908230986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n-  Timeit time = parseArgs(data, lat, lon)[1];\n+  double time = parseArgs(data, lat, lon)[1];\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n"
+                },
+                {
+                    "date": 1642943118554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n+  double observer = parseArgs(data, lat, lon)[0];\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n@@ -28,13 +29,15 @@\n         print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n       } else {\n-        helioEclipLon(body, time);\n-        geoLon(body, time);\n+        // helioEclipLon(body, time);\n+        // geoLon(body, time);\n+\n         print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${geoLon(body, time)}');\n+        // print('Гео - ${geoLon(body, time)}');\n+        print(toposLon(body, time, observer));\n       }\n     }\n   }\n   // print('');\n"
+                },
+                {
+                    "date": 1642943172976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,11 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   double observer = parseArgs(data, lat, lon)[0];\n+\n+  print(observer.runtimeType);\n+\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n@@ -35,9 +38,9 @@\n \n         print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         // print('Гео - ${geoLon(body, time)}');\n-        print(toposLon(body, time, observer));\n+        // print(toposLon(body, time, observer));\n       }\n     }\n   }\n   // print('');\n"
+                },
+                {
+                    "date": 1642943192260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n-  double observer = parseArgs(data, lat, lon)[0];\n+  var observer = parseArgs(data, lat, lon)[0];\n \n   print(observer.runtimeType);\n \n   for (var body in bodyList) {\n"
+                },
+                {
+                    "date": 1642943707931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n         print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         // print('Гео - ${geoLon(body, time)}');\n-        // print(toposLon(body, time, observer));\n+        print(toposLon(body, time, observer));\n       }\n     }\n   }\n   // print('');\n"
+                },
+                {
+                    "date": 1642943749359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n+  // DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n   double lat = 42.9;\n   double lon = 74.6;\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1642943804948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n   // DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n-  double lat = 42.9;\n-  double lon = 74.6;\n+  double lat = 0; //42.9\n+  double lon = 0; //74.6\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n"
+                },
+                {
+                    "date": 1642992574493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,12 +35,12 @@\n       } else {\n         // helioEclipLon(body, time);\n         // geoLon(body, time);\n \n-        print(body);\n+        // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         // print('Гео - ${geoLon(body, time)}');\n-        print(toposLon(body, time, observer));\n+        print('$body - ${toposLon(body, time, observer)}');\n       }\n     }\n   }\n   // print('');\n"
+                },
+                {
+                    "date": 1642992763797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n-import 'dart:io';\n-\n import 'vsop/src/func.dart';\n import 'vsop/domes.dart';\n import 'vsop/astronomy.dart';\n import 'vsop/calc_moon.dart';\n@@ -17,10 +15,8 @@\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n \n-  print(observer.runtimeType);\n-\n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n"
+                },
+                {
+                    "date": 1642993185876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \n         // print(body);\n         // print('Гелио - ${helioEclipLon(body, time)}');\n         // print('Гео - ${geoLon(body, time)}');\n-        print('$body - ${toposLon(body, time, observer)}');\n+        print('$body - ${geoLon(body, time, observer)}');\n       }\n     }\n   }\n   // print('');\n"
+                },
+                {
+                    "date": 1642996222793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n   }\n   // print('');\n   var dt = numDate(data);\n-  var _domes = domes(data, lat, lon, dt);\n+  // var _domes = domes(data, lat, lon, dt);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n   // }\n \n"
+                },
+                {
+                    "date": 1643004363113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,26 +21,18 @@\n       var moon = geoMoon(time)[1]; // более точный расчет\n       print(body);\n       print('Гео - $moon');\n     } else {\n-      if (body == Body.sun) {\n-        helioEclipLon(body, time);\n-        deg360(helioEclipLon(Body.earth, time) + 180);\n-        print(body);\n-        // print('Гелио - ${helioEclipLon(body, time)}');\n-        print('Гео - ${deg360(helioEclipLon(Body.earth, time) - 180)}');\n-      } else {\n-        // helioEclipLon(body, time);\n-        // geoLon(body, time);\n+      // helioEclipLon(body, time);\n+      // geoLon(body, time);\n \n-        // print(body);\n-        // print('Гелио - ${helioEclipLon(body, time)}');\n-        // print('Гео - ${geoLon(body, time)}');\n-        print('$body - ${geoLon(body, time, observer)}');\n-      }\n+      // print(body);\n+      // print('Гелио - ${helioEclipLon(body, time)}');\n+      // print('Гео - ${geoLon(body, time)}');\n+      print('$body - ${geoLon(body, time, observer)}');\n     }\n   }\n-  // print('');\n+  // print(''); // print('Гелио - ${helioEclipLon(body, time)}');\n   var dt = numDate(data);\n   // var _domes = domes(data, lat, lon, dt);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n"
+                },
+                {
+                    "date": 1643004459884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,9 @@\n \n   for (var body in bodyList) {\n     if (body == Body.moon) {\n       var moon = geoMoon(time)[1]; // более точный расчет\n-      print(body);\n-      print('Гео - $moon');\n+      print('$body - $moon');\n     } else {\n       // helioEclipLon(body, time);\n       // geoLon(body, time);\n \n"
+                },
+                {
+                    "date": 1643005393758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,10 @@\n       // helioEclipLon(body, time);\n       // geoLon(body, time);\n \n       // print(body);\n-      // print('Гелио - ${helioEclipLon(body, time)}');\n-      // print('Гео - ${geoLon(body, time)}');\n-      print('$body - ${geoLon(body, time, observer)}');\n+      print('Гелио $body -  ${helioEclipLon(body, time)}');\n+      // print('$body - ${geoLon(body, time, observer)}');\n     }\n   }\n   // print(''); // print('Гелио - ${helioEclipLon(body, time)}');\n   var dt = numDate(data);\n"
+                },
+                {
+                    "date": 1643005411475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n       // helioEclipLon(body, time);\n       // geoLon(body, time);\n \n       // print(body);\n-      print('Гелио $body -  ${helioEclipLon(body, time)}');\n+      print('$body - ${helioEclipLon(body, time)}');\n       // print('$body - ${geoLon(body, time, observer)}');\n     }\n   }\n   // print(''); // print('Гелио - ${helioEclipLon(body, time)}');\n"
+                },
+                {
+                    "date": 1643005708873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n       // print('$body - ${geoLon(body, time, observer)}');\n     }\n   }\n   // print(''); // print('Гелио - ${helioEclipLon(body, time)}');\n-  var dt = numDate(data);\n+  // var dt = numDate(data);\n   // var _domes = domes(data, lat, lon, dt);\n   // for (var item in _domes) {\n   //   print(item.toStringAsFixed(2));\n   // }\n"
+                },
+                {
+                    "date": 1643005976871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,20 +14,21 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n+  for (int i = 0; i <= 1000; i++) {\n+    for (var body in bodyList) {\n+      if (body == Body.moon) {\n+        geoMoon(time)[1];\n+        // var moon = geoMoon(time)[1]; // более точный расчет\n+        // print('$body - $moon');\n+      } else {\n+        helioEclipLon(body, time);\n+        geoLon(body, time, observer);\n \n-  for (var body in bodyList) {\n-    if (body == Body.moon) {\n-      var moon = geoMoon(time)[1]; // более точный расчет\n-      print('$body - $moon');\n-    } else {\n-      // helioEclipLon(body, time);\n-      // geoLon(body, time);\n-\n-      // print(body);\n-      print('$body - ${helioEclipLon(body, time)}');\n-      // print('$body - ${geoLon(body, time, observer)}');\n+        // print('$body - ${helioEclipLon(body, time)}');\n+        // print('$body - ${geoLon(body, time, observer)}');\n+      }\n     }\n   }\n   // print(''); // print('Гелио - ${helioEclipLon(body, time)}');\n   // var dt = numDate(data);\n"
+                },
+                {
+                    "date": 1643006000746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n-  for (int i = 0; i <= 1000; i++) {\n+  for (int i = 0; i <= 10000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643006034368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n-  for (int i = 0; i <= 10000; i++) {\n+  for (int i = 0; i <= 100000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643006068096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n-  for (int i = 0; i <= 100000; i++) {\n+  for (int i = 0; i <= 10000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643006090374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n   var observer = parseArgs(data, lat, lon)[0];\n-  for (int i = 0; i <= 10000; i++) {\n+  for (int i = 0; i <= 100000; i++) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643017309146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,16 +7,18 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  // DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n+  DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n   double lat = 0; //42.9\n   double lon = 0; //74.6\n   List bodyList = Body.values;\n \n   double time = parseArgs(data, lat, lon)[1];\n-  var observer = parseArgs(data, lat, lon)[0];\n-  for (int i = 0; i <= 100000; i++) {\n+  Observer observer = parseArgs(data, lat, lon)[0];\n+\n+  // for (int i = 0; i <= 100000; i++) {\n+  while (data.isBefore(dataNext)) {\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643017373821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n   Observer observer = parseArgs(data, lat, lon)[0];\n \n   // for (int i = 0; i <= 100000; i++) {\n   while (data.isBefore(dataNext)) {\n+    data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643017430578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n void main() {\n   final stopwatch = Stopwatch()..start();\n \n   DateTime data = DateTime.utc(1977, 5, 27, 16, 52);\n-  DateTime dataNext = DateTime.utc(1977, 5, 28, 16, 52);\n+  DateTime dataNext = DateTime.utc(2250, 5, 27, 16, 52);\n   double lat = 0; //42.9\n   double lon = 0; //74.6\n   List bodyList = Body.values;\n \n"
+                },
+                {
+                    "date": 1643017507952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,11 +15,11 @@\n \n   double time = parseArgs(data, lat, lon)[1];\n   Observer observer = parseArgs(data, lat, lon)[0];\n \n-  // for (int i = 0; i <= 100000; i++) {\n-  while (data.isBefore(dataNext)) {\n-    data = data.add(Duration(days: 1));\n+  for (int i = 0; i <= 100000; i++) {\n+    // while (data.isBefore(dataNext)) {\n+    //   data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n         geoMoon(time)[1];\n         // var moon = geoMoon(time)[1]; // более точный расчет\n"
+                },
+                {
+                    "date": 1643525989680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n   double time = parseArgs(data, lat, lon)[1];\n   Observer observer = parseArgs(data, lat, lon)[0];\n \n-  for (int i = 0; i <= 100000; i++) {\n+  for (int i = 0; i <= 1; i++) {\n     // while (data.isBefore(dataNext)) {\n     //   data = data.add(Duration(days: 1));\n     for (var body in bodyList) {\n       if (body == Body.moon) {\n"
+                }
+            ],
+            "date": 1641639590991,
+            "name": "Commit-0",
+            "content": "// import '../models/simple.dart';\n// ignore_for_file: unused_local_variable, non_constant_identifier_names\n\nimport '../simple/defs/func.dart';\nimport '../simple/defs/domes.dart';\n\nvoid main() {\n  var LON = 74.8;\n  var LAT = 42.6;\n  var d = num_date(1977, 5, 27, 16, 52);\n\n  var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n\n  // for (var item in _planets) {\n  //   print(item[0]);\n  // }\n  // print('__');\n  for (var item in _domes) {\n    print(item.toStringAsFixed(2));\n  }\n\n  // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n}\n"
+        }
+    ]
+}

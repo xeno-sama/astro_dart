@@ -1,0 +1,18 @@
+{
+    "sourceFile": "main_vsop.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642126875158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642126875158,
+            "name": "Commit-0",
+            "content": "// import '../models/simple.dart';\n// ignore_for_file: unused_local_variable, non_constant_identifier_names\n\nimport 'bin/vsop/src/func.dart';\nimport 'bin/vsop/domes.dart';\n\nvoid main() {\n  var LON = 74.8;\n  var LAT = 42.6;\n  var d = numDate(1977, 5, 27, 16, 52);\n\n  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n\n  // for (var item in _planets) {\n  //   print(item[0]);\n  // }\n  // print('__');\n  for (var item in _domes) {\n    print(item.toStringAsFixed(2));\n  }\n\n  // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n}\n"
+        }
+    ]
+}

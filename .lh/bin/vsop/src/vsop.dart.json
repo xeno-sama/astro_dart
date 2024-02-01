@@ -1,0 +1,406 @@
+{
+    "sourceFile": "bin/vsop/src/vsop.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 97,
+            "patches": [
+                {
+                    "date": 1642135336583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642135408221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,22 +8,22 @@\n import 'rotateVector.dart';\n import 'package:collection/collection.dart';\n \n \n-double VsopFormula(formula, t, clamp_angle) {\n-    double tpower = 1.0;\n-    double coord = 0.0;\n-    for (var series in formula) \n-        {\n-          double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n-          if (clamp_angle) {\n-            // Longitude angles can be hundreds of radians.\n-            //Improve precision by keeping each increment within [-2*pi, +2*pi].\n-            var incr = fmod(incr, PI2);}\n-        double coord += incr;\n-        double tpower *= t;}\n-    return coord;\n-}\n+// double VsopFormula(formula, t, clamp_angle) {\n+//     double tpower = 1.0;\n+//     double coord = 0.0;\n+//     for (var series in formula) \n+//         {\n+//           double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n+//           if (clamp_angle) {\n+//             // Longitude angles can be hundreds of radians.\n+//             //Improve precision by keeping each increment within [-2*pi, +2*pi].\n+//             var incr = fmod(incr, PI2);}\n+//         double coord += incr;\n+//         double tpower *= t;}\n+//     return coord;\n+// }\n \n // def CalcVsop(model, time):\n //     t = time.tt / DAYS_PER_MILLENNIUM\n //     lon = VsopFormula(model[0], t, True)\n"
+                },
+                {
+                    "date": 1642135416358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import 'dart:math';\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n-import 'package:collection/collection.dart';\n+// import 'package:collection/collection.dart';\n \n \n // double VsopFormula(formula, t, clamp_angle) {\n //     double tpower = 1.0;\n"
+                },
+                {
+                    "date": 1642136572901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,5 +97,10 @@\n // def VsopHelioDistance(model, time):\n //     # The caller only wants to know the distance between the planet and the Sun.\n //     # So we only need to calculate the radial component of the spherical coordinates.\n //     # There is no need to translate coordinates.\n-//     return VsopFormula(model[2], time.tt / DAYS_PER_MILLENNIUM, False)\n\\ No newline at end of file\n+//     return VsopFormula(model[2], time.tt / DAYS_PER_MILLENNIUM, False)\n+\n+//vsop78\n+// [[], [[0.00227777722, 3.4137662053, 6283.0758499914], [3.805678e-05, 3.37063423795, 12566.1516999828]]]\n+\n+// [[[0.01346277648, 2.61877810547, 74.7815985673], [0.000623414, 5.08111189648, 149.5631971346], [0.00061601196, 3.14159265359, 0.0], [9.963722e-05, 1.61603805646, 76.2660712756], [9.92616e-05, 0.57630380333, 73.297125859]], [[0.00034101978, 0.01321929936, 74.7815985673]]]\n"
+                },
+                {
+                    "date": 1642324078008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,8 @@\n-// from math import degrees,cos, fmod, sin, atan2, sqrt\n-// from vsop.src.classes import Vector, EclipticCoordinates, TerseVector, body_state_t\n-// from vsop.src.constants import DAYS_PER_MILLENNIUM, PI2\n-// from vsop.src.rotateVector import VsopRotate, VsopSphereToRect\n import 'dart:math';\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n-// import 'package:collection/collection.dart';\n \n \n // double VsopFormula(formula, t, clamp_angle) {\n //     double tpower = 1.0;\n"
+                },
+                {
+                    "date": 1642325076654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,23 +3,26 @@\n import 'classes.dart';\n import 'rotateVector.dart';\n \n \n-// double VsopFormula(formula, t, clamp_angle) {\n-//     double tpower = 1.0;\n-//     double coord = 0.0;\n-//     for (var series in formula) \n-//         {\n-//           double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n-//           if (clamp_angle) {\n-//             // Longitude angles can be hundreds of radians.\n-//             //Improve precision by keeping each increment within [-2*pi, +2*pi].\n-//             var incr = fmod(incr, PI2);}\n-//         double coord += incr;\n-//         double tpower *= t;}\n-//     return coord;\n-// }\n+double VsopFormula(formula, t, clamp_angle) {\n+    double tpower = 1.0;\n+    double coord = 0.0;\n+    for (var series in formula) \n+        {\n+          dynamic tmp = [for (var z in series) z[0]*cos(z[1]+z[2]*t) ];\n \n+          double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n+\n+          if (clamp_angle) {\n+            // Longitude angles can be hundreds of radians.\n+            //Improve precision by keeping each increment within [-2*pi, +2*pi].\n+            var incr = fmod(incr, PI2);}\n+        double coord += incr;\n+        double tpower *= t;}\n+    return coord;\n+}\n+\n // def CalcVsop(model, time):\n //     t = time.tt / DAYS_PER_MILLENNIUM\n //     lon = VsopFormula(model[0], t, True)\n //     lat = VsopFormula(model[1], t, False)\n"
+                },
+                {
+                    "date": 1642331244320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,25 +3,29 @@\n import 'classes.dart';\n import 'rotateVector.dart';\n \n \n-double VsopFormula(formula, t, clamp_angle) {\n-    double tpower = 1.0;\n-    double coord = 0.0;\n-    for (var series in formula) \n-        {\n-          dynamic tmp = [for (var z in series) z[0]*cos(z[1]+z[2]*t) ];\n+// double VsopFormula(formula, t, clamp_angle) {\n+//     double tpower = 1.0;\n+//     double coord = 0.0;\n+//     for (var series in formula) \n+//         {\n+//           for (var abc_series in series) {\n+//             dynamic tmp = [ for (var z in abc_series) z[0]*cos(z[1]+z[2]*t) ];\n+            \n+//           }\n+          \n \n-          double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n+//           double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n \n-          if (clamp_angle) {\n-            // Longitude angles can be hundreds of radians.\n-            //Improve precision by keeping each increment within [-2*pi, +2*pi].\n-            var incr = fmod(incr, PI2);}\n-        double coord += incr;\n-        double tpower *= t;}\n-    return coord;\n-}\n+//           if (clamp_angle) {\n+//             // Longitude angles can be hundreds of radians.\n+//             //Improve precision by keeping each increment within [-2*pi, +2*pi].\n+//             var incr = fmod(incr, PI2);}\n+//         double coord += incr;\n+//         double tpower *= t;}\n+//     return coord;\n+// }\n \n // def CalcVsop(model, time):\n //     t = time.tt / DAYS_PER_MILLENNIUM\n //     lon = VsopFormula(model[0], t, True)\n"
+                },
+                {
+                    "date": 1642380987938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,19 +2,17 @@\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n \n-\n // double VsopFormula(formula, t, clamp_angle) {\n //     double tpower = 1.0;\n //     double coord = 0.0;\n-//     for (var series in formula) \n+//     for (var series in formula)\n //         {\n //           for (var abc_series in series) {\n //             dynamic tmp = [ for (var z in abc_series) z[0]*cos(z[1]+z[2]*t) ];\n-            \n+\n //           }\n-          \n \n //           double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n \n //           if (clamp_angle) {\n@@ -25,15 +23,16 @@\n //         double tpower *= t;}\n //     return coord;\n // }\n \n-// def CalcVsop(model, time):\n-//     t = time.tt / DAYS_PER_MILLENNIUM\n-//     lon = VsopFormula(model[0], t, True)\n-//     lat = VsopFormula(model[1], t, False)\n-//     rad = VsopFormula(model[2], t, False)\n-//     eclip = VsopSphereToRect(lon, lat, rad)\n-//     return VsopRotate(eclip).ToAstroVector(time)\n+dynamic CalcVsop(model, time) {\n+  double t = time.tt / DAYS_PER_MILLENNIUM;\n+  double lon = VsopFormula(model[0], t, True);\n+  double lat = VsopFormula(model[1], t, False);\n+  double rad = VsopFormula(model[2], t, False);\n+  double eclip = VsopSphereToRect(lon, lat, rad);\n+  return VsopRotate(eclip).ToAstroVector(time);\n+}\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n \n@@ -74,9 +73,8 @@\n //     equ_pos = VsopRotate(eclip_pos)\n //     equ_vel = VsopRotate(eclip_vel)\n //     return body_state_t(tt, equ_pos, equ_vel)\n \n-\n // def VsopDeriv(formula, t):\n //     tpower = 1      # t**s\n //     dpower = 0      # t**(s-1)\n //     deriv = 0\n@@ -94,9 +92,8 @@\n //         tpower *= t\n //         s += 1\n //     return deriv\n \n-\n // def VsopHelioDistance(model, time):\n //     # The caller only wants to know the distance between the planet and the Sun.\n //     # So we only need to calculate the radial component of the spherical coordinates.\n //     # There is no need to translate coordinates.\n"
+                },
+                {
+                    "date": 1642381128750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,16 +23,16 @@\n //         double tpower *= t;}\n //     return coord;\n // }\n \n-dynamic CalcVsop(model, time) {\n-  double t = time.tt / DAYS_PER_MILLENNIUM;\n-  double lon = VsopFormula(model[0], t, True);\n-  double lat = VsopFormula(model[1], t, False);\n-  double rad = VsopFormula(model[2], t, False);\n-  double eclip = VsopSphereToRect(lon, lat, rad);\n-  return VsopRotate(eclip).ToAstroVector(time);\n-}\n+// dynamic CalcVsop(model, time) {\n+//   double t = time.tt / DAYS_PER_MILLENNIUM;\n+//   double lon = VsopFormula(model[0], t, True);\n+//   double lat = VsopFormula(model[1], t, False);\n+//   double rad = VsopFormula(model[2], t, False);\n+//   double eclip = VsopSphereToRect(lon, lat, rad);\n+//   return VsopRotate(eclip).ToAstroVector(time);\n+// }\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n \n"
+                },
+                {
+                    "date": 1642382064272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,38 +2,36 @@\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n \n-// double VsopFormula(formula, t, clamp_angle) {\n-//     double tpower = 1.0;\n-//     double coord = 0.0;\n-//     for (var series in formula)\n-//         {\n-//           for (var abc_series in series) {\n-//             dynamic tmp = [ for (var z in abc_series) z[0]*cos(z[1]+z[2]*t) ];\n+double VsopFormula(formula, t, clamp_angle) {\n+  double tpower = 1.0;\n+  double coord = 0.0;\n+  for (var series in formula) {\n+    for (var abc_series in series) {\n+      dynamic tmp = [for (var z in abc_series) z[0] * cos(z[1] + z[2] * t)];\n+    }\n \n-//           }\n+    // double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n+    double incr = 0.1; //temp incr\n+    if (clamp_angle) {\n+      incr = incr % PI2;\n+    }\n+    coord += incr;\n+    tpower *= t;\n+  }\n+  return coord;\n+}\n \n-//           double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n+dynamic CalcVsop(model, time) {\n+  double t = time / DAYS_PER_MILLENNIUM;\n+  double lon = VsopFormula(model[0], t, true);\n+  double lat = VsopFormula(model[1], t, false);\n+  double rad = VsopFormula(model[2], t, false);\n+  double eclip = VsopSphereToRect(lon, lat, rad);\n+  return VsopRotate(eclip).ToAstroVector(time);\n+}\n \n-//           if (clamp_angle) {\n-//             // Longitude angles can be hundreds of radians.\n-//             //Improve precision by keeping each increment within [-2*pi, +2*pi].\n-//             var incr = fmod(incr, PI2);}\n-//         double coord += incr;\n-//         double tpower *= t;}\n-//     return coord;\n-// }\n-\n-// dynamic CalcVsop(model, time) {\n-//   double t = time.tt / DAYS_PER_MILLENNIUM;\n-//   double lon = VsopFormula(model[0], t, True);\n-//   double lat = VsopFormula(model[1], t, False);\n-//   double rad = VsopFormula(model[2], t, False);\n-//   double eclip = VsopSphereToRect(lon, lat, rad);\n-//   return VsopRotate(eclip).ToAstroVector(time);\n-// }\n-\n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n \n //     lon = VsopFormula(model[0], t, True)\n"
+                },
+                {
+                    "date": 1642382159842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = VsopFormula(model[0], t, true);\n   double lat = VsopFormula(model[1], t, false);\n   double rad = VsopFormula(model[2], t, false);\n-  double eclip = VsopSphereToRect(lon, lat, rad);\n+  TerseVector eclip = VsopSphereToRect(lon, lat, rad);\n   return VsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n"
+                },
+                {
+                    "date": 1642398382088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,10 @@\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = VsopFormula(model[0], t, true);\n   double lat = VsopFormula(model[1], t, false);\n   double rad = VsopFormula(model[2], t, false);\n-  TerseVector eclip = VsopSphereToRect(lon, lat, rad);\n-  return VsopRotate(eclip).ToAstroVector(time);\n+  TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n+  return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n"
+                },
+                {
+                    "date": 1642398588477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n \n-double VsopFormula(formula, t, clamp_angle) {\n+double vsopFormula(formula, t, clamp_angle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   for (var series in formula) {\n     for (var abc_series in series) {\n@@ -21,13 +21,13 @@\n   }\n   return coord;\n }\n \n-dynamic CalcVsop(model, time) {\n+dynamic calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n-  double lon = VsopFormula(model[0], t, true);\n-  double lat = VsopFormula(model[1], t, false);\n-  double rad = VsopFormula(model[2], t, false);\n+  double lon = vsopFormula(model[0], t, true);\n+  double lat = vsopFormula(model[1], t, false);\n+  double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   return vsopRotate(eclip).ToAstroVector(time);\n }\n \n"
+                },
+                {
+                    "date": 1642398653358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import 'constants.dart';\n import 'classes.dart';\n import 'rotateVector.dart';\n \n-double vsopFormula(formula, t, clamp_angle) {\n+double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   for (var series in formula) {\n     for (var abc_series in series) {\n@@ -12,9 +12,9 @@\n     }\n \n     // double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n     double incr = 0.1; //temp incr\n-    if (clamp_angle) {\n+    if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n     tpower *= t;\n"
+                },
+                {
+                    "date": 1642398741963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n     }\n     coord += incr;\n     tpower *= t;\n   }\n+  print(coord);\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642399016008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,11 @@\n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   for (var series in formula) {\n-    for (var abc_series in series) {\n-      dynamic tmp = [for (var z in abc_series) z[0] * cos(z[1] + z[2] * t)];\n+    for (var val in series) {\n+      print('${val[0]}, ${val[1]}, ${val[2]}');\n+      // dynamic tmp = [for (var z in val) z[0] * cos(z[1] + z[2] * t)];\n     }\n \n     // double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n     double incr = 0.1; //temp incr\n"
+                },
+                {
+                    "date": 1642399023678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  print(coord);\n+  // print(coord);\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642399272904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,16 +5,19 @@\n \n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n+  double incr = 0.0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print('${val[0]}, ${val[1]}, ${val[2]}');\n+      // print('${val[0]}, ${val[1]}, ${val[2]}');\n+      incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       // dynamic tmp = [for (var z in val) z[0] * cos(z[1] + z[2] * t)];\n     }\n+    print(incr);\n \n     // double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n-    double incr = 0.1; //temp incr\n+    // incr = 0.1; //temp incr\n     if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n"
+                },
+                {
+                    "date": 1642399511194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  // print(coord);\n+  print('coord = $coord');\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642399969561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,20 +10,17 @@\n   for (var series in formula) {\n     for (var val in series) {\n       // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n-      // dynamic tmp = [for (var z in val) z[0] * cos(z[1] + z[2] * t)];\n     }\n-    print(incr);\n \n-    // double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n-    // incr = 0.1; //temp incr\n     if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n     tpower *= t;\n   }\n+  print(incr);\n   print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642400447134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,16 +11,16 @@\n     for (var val in series) {\n       // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n-\n+    print(incr);\n     if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  print(incr);\n+  print('incr = $incr');\n   print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642400502605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,17 +11,16 @@\n     for (var val in series) {\n       // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n-    print(incr);\n     if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  print('incr = $incr');\n-  print('coord = $coord');\n+  // print('incr = $incr');\n+  // print('coord = $coord');\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642400687132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n \n dynamic calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true);\n+  print(lon);\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   return vsopRotate(eclip).ToAstroVector(time);\n"
+                },
+                {
+                    "date": 1642400809213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   double coord = 0.0;\n   double incr = 0.0;\n   for (var series in formula) {\n     for (var val in series) {\n-      // print('${val[0]}, ${val[1]}, ${val[2]}');\n+      print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n     if (clampAngle) {\n       incr = incr % PI2;\n"
+                },
+                {
+                    "date": 1642400859697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,19 +8,19 @@\n   double coord = 0.0;\n   double incr = 0.0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print('${val[0]}, ${val[1]}, ${val[2]}');\n+      // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n     if (clampAngle) {\n       incr = incr % PI2;\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  // print('incr = $incr');\n-  // print('coord = $coord');\n+  print('incr = $incr');\n+  print('coord = $coord');\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642400991425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n     }\n     coord += incr;\n     tpower *= t;\n   }\n-  print('incr = $incr');\n-  print('coord = $coord');\n+  // print('incr = $incr');\n+  // print('coord = $coord');\n   return coord;\n }\n \n dynamic calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642401212404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n dynamic calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true);\n-  print(lon);\n+  // print(lon);\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   return vsopRotate(eclip).ToAstroVector(time);\n"
+                },
+                {
+                    "date": 1642401603195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   // print('coord = $coord');\n   return coord;\n }\n \n-dynamic calcVsop(model, time) {\n+Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true);\n   // print(lon);\n   double lat = vsopFormula(model[1], t, false);\n"
+                },
+                {
+                    "date": 1642404890990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,12 +25,12 @@\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true);\n-  // print(lon);\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n+  print('lon, lat, rad $lon, $lat, $rad');\n   return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n"
+                },
+                {
+                    "date": 1642404934310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   double lon = vsopFormula(model[0], t, true);\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  print('lon, lat, rad $lon, $lat, $rad');\n+  print('t lon, lat, rad $t $lon, $lat, $rad');\n   return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n"
+                },
+                {
+                    "date": 1642405175661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n     if (clampAngle) {\n       incr = incr % PI2;\n+      print('incr = $incr');\n     }\n     coord += incr;\n     tpower *= t;\n   }\n"
+                },
+                {
+                    "date": 1642405389318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,11 @@\n       print('incr = $incr');\n     }\n     coord += incr;\n     tpower *= t;\n+    print('_incr = $incr');\n   }\n-  // print('incr = $incr');\n+  print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642405588931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     coord += incr;\n     tpower *= t;\n     print('_incr = $incr');\n   }\n-  print('__incr = $incr');\n+  // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642405636121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     for (var val in series) {\n       // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n-    if (clampAngle) {\n+    if (clampAngle == true) {\n       incr = incr % PI2;\n       print('incr = $incr');\n     }\n     coord += incr;\n"
+                },
+                {
+                    "date": 1642405666974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,13 @@\n     }\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       print('incr = $incr');\n+    } else {\n+      coord += incr;\n+      tpower *= t;\n     }\n-    coord += incr;\n-    tpower *= t;\n+\n     print('_incr = $incr');\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n"
+                },
+                {
+                    "date": 1642405861965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n }\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n-  double lon = vsopFormula(model[0], t, true);\n+  double lon = vsopFormula(model[0], t, false);\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   print('t lon, lat, rad $t $lon, $lat, $rad');\n"
+                },
+                {
+                    "date": 1642406000368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,26 +11,27 @@\n     for (var val in series) {\n       // print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n+    print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       print('incr = $incr');\n     } else {\n       coord += incr;\n       tpower *= t;\n     }\n \n-    print('_incr = $incr');\n+    // print('_incr = $incr');\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n-  double lon = vsopFormula(model[0], t, false);\n+  double lon = vsopFormula(model[0], t, false); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   print('t lon, lat, rad $t $lon, $lat, $rad');\n"
+                },
+                {
+                    "date": 1642418792994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,15 +8,15 @@\n   double coord = 0.0;\n   double incr = 0.0;\n   for (var series in formula) {\n     for (var val in series) {\n-      // print('${val[0]}, ${val[1]}, ${val[2]}');\n+      print('${val[0]}, ${val[1]}, ${val[2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n-    print('0_incr = $incr');\n+    // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n-      print('incr = $incr');\n+      // print('incr = $incr');\n     } else {\n       coord += incr;\n       tpower *= t;\n     }\n"
+                },
+                {
+                    "date": 1642418869570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,14 @@\n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   double incr = 0.0;\n+  int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print('${val[0]}, ${val[1]}, ${val[2]}');\n+      print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+      i++;\n     }\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n"
+                },
+                {
+                    "date": 1642419250242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n+      print(val);\n+      // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642419311896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print(val);\n+      print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642419548750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print(val[0]);\n+      print(val[0][0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642419587708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print(val[0][0]);\n+      print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642419595820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print(val[0]);\n+      print(val[0][0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642419604562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   for (var series in formula) {\n     for (var val in series) {\n-      print(val[0][0]);\n+      print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642419682572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,16 @@\n   double tpower = 1.0;\n   double coord = 0.0;\n   double incr = 0.0;\n   int i = 0;\n-  for (var series in formula) {\n-    for (var val in series) {\n-      print(val[0]);\n-      // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n-      incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n-      i++;\n-    }\n+  for (var val in formula) {\n+    print(val[0]);\n+    // for (var val in series) {\n+    //   print(val[0]);\n+    //   // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n+    //   incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+    //   i++;\n+    // }\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       // print('incr = $incr');\n"
+                },
+                {
+                    "date": 1642419713862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   double coord = 0.0;\n   double incr = 0.0;\n   int i = 0;\n   for (var val in formula) {\n-    print(val[0]);\n+    print(val[0][0]);\n     // for (var val in series) {\n     //   print(val[0]);\n     //   // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n     //   incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n"
+                },
+                {
+                    "date": 1642421535794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,26 +7,22 @@\n   double tpower = 1.0;\n   double coord = 0.0;\n   double incr = 0.0;\n   int i = 0;\n+  // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n     print(val[0][0]);\n-    // for (var val in series) {\n-    //   print(val[0]);\n-    //   // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n-    //   incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n-    //   i++;\n-    // }\n+    // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n+    incr = val[0][0] + val[0][1] + val[0][2];\n+    print('_incr = $incr');\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       // print('incr = $incr');\n     } else {\n       coord += incr;\n       tpower *= t;\n     }\n-\n-    // print('_incr = $incr');\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n@@ -111,4 +107,16 @@\n //vsop78\n // [[], [[0.00227777722, 3.4137662053, 6283.0758499914], [3.805678e-05, 3.37063423795, 12566.1516999828]]]\n \n // [[[0.01346277648, 2.61877810547, 74.7815985673], [0.000623414, 5.08111189648, 149.5631971346], [0.00061601196, 3.14159265359, 0.0], [9.963722e-05, 1.61603805646, 76.2660712756], [9.92616e-05, 0.57630380333, 73.297125859]], [[0.00034101978, 0.01321929936, 74.7815985673]]]\n+\n+\n+\n+\n+\n+// for (var val in series) {\n+    //   print(val[0]);\n+    //   // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n+    //   incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+    //   i++;\n+    // }\n+    // print('0_incr = $incr');\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642421545819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    print(val[0][0]);\n+    // print(val[0][0]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     incr = val[0][0] + val[0][1] + val[0][2];\n     print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642421616239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    // print(val[0][0]);\n+    print(val[0][0]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n-    incr = val[0][0] + val[0][1] + val[0][2];\n-    print('_incr = $incr');\n+    // incr = val[0][0] + val[0][1] + val[0][2];\n+    // print('_incr = $incr');\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       // print('incr = $incr');\n"
+                },
+                {
+                    "date": 1642421632267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    print(val[0][0]);\n+    print(val[0][1]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr = val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642421755783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    print(val[0][1]);\n+    // print(val[0][1]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n-    // incr = val[0][0] + val[0][1] + val[0][2];\n+    incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n@@ -22,9 +22,9 @@\n       coord += incr;\n       tpower *= t;\n     }\n   }\n-  // print('__incr = $incr');\n+  print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642421855574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    // print(val[0][1]);\n+    print(val[0][1]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n-    incr += val[0][0] + val[0][1] + val[0][2];\n+    // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n@@ -22,9 +22,9 @@\n       coord += incr;\n       tpower *= t;\n     }\n   }\n-  print('__incr = $incr');\n+  // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n }\n \n"
+                },
+                {
+                    "date": 1642421886628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var val in formula) {\n-    print(val[0][1]);\n+    print(val[1][0]);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642422122719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,16 @@\n   double coord = 0.0;\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n-  for (var val in formula) {\n-    print(val[1][0]);\n+  for (var lst in formula) {\n+    print(lst[1][0]);\n+    for (var val in lst) {\n+      print(val[i]);\n+      // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n+      // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+      i++;\n+    }\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642422146517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   int i = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n-    print(lst[1][0]);\n+    print(lst[0][0]);\n     for (var val in lst) {\n       print(val[i]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n"
+                },
+                {
+                    "date": 1642422199076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     print(lst[0][0]);\n     for (var val in lst) {\n-      print(val[i]);\n+      print(val[0][i]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642422238533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     print(lst[0][0]);\n     for (var val in lst) {\n-      print(val[0][i]);\n+      print(val);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642422276265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     print(lst[0][0]);\n     for (var val in lst) {\n-      print(val);\n+      print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n       i++;\n     }\n"
+                },
+                {
+                    "date": 1642422476533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,18 +6,19 @@\n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   double incr = 0.0;\n-  int i = 0;\n+  double i0 = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     print(lst[0][0]);\n     for (var val in lst) {\n-      print(val[0]);\n+      i0 += val[0];\n+      // print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n-      i++;\n     }\n+    print(i0);\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642422503028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   double incr = 0.0;\n   double i0 = 0;\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n-    print(lst[0][0]);\n+    // print(lst[0][0]);\n     for (var val in lst) {\n       i0 += val[0];\n       // print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n"
+                },
+                {
+                    "date": 1642422730383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n     print(i0);\n+    i0 = 0;\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642422783136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,20 +6,20 @@\n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n   double incr = 0.0;\n-  double i0 = 0;\n+\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n-    // print(lst[0][0]);\n+    double i0 = 0;\n     for (var val in lst) {\n       i0 += val[0];\n       // print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n     print(i0);\n-    i0 = 0;\n+\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n"
+                },
+                {
+                    "date": 1642422797691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     double i0 = 0;\n     for (var val in lst) {\n-      i0 += val[0];\n+      i0 += val[1];\n       // print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n       // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n"
+                },
+                {
+                    "date": 1642423210873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,20 +5,20 @@\n \n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n-  double incr = 0.0;\n \n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     double i0 = 0;\n+    double incr = 0.0;\n     for (var val in lst) {\n       i0 += val[1];\n       // print(val[0]);\n       // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n-      // incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+      incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n     }\n-    print(i0);\n+    print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n"
+                },
+                {
+                    "date": 1642423467958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,17 +8,14 @@\n   double coord = 0.0;\n \n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n-    double i0 = 0;\n     double incr = 0.0;\n     for (var val in lst) {\n-      i0 += val[1];\n       // print(val[0]);\n-      // print('${val[i][0]}, ${val[i][1]}, ${val[i][2]}');\n-      incr += tpower * (val[0] * cos(val[1] + val[2] * t));\n+      incr += (val[0] * cos(val[1] + val[2] * t));\n     }\n-    print(incr);\n+    print(tpower * incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n"
+                },
+                {
+                    "date": 1642423898979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n     for (var val in lst) {\n       // print(val[0]);\n       incr += (val[0] * cos(val[1] + val[2] * t));\n     }\n-    print(tpower * incr);\n+    incr *= tpower;\n+    print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n"
+                },
+                {
+                    "date": 1642426608747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n-      incr += (val[0] * cos(val[1] + val[2] * t));\n+      incr += val[0] * cos(val[1] + val[2] * t);\n+      // incr += val[0] +(val[1] + val[2] * t);\n     }\n     incr *= tpower;\n     print(incr);\n \n"
+                },
+                {
+                    "date": 1642426641036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,12 +11,12 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n-      incr += val[0] * cos(val[1] + val[2] * t);\n-      // incr += val[0] +(val[1] + val[2] * t);\n+      // incr += val[0] * cos(val[1] + val[2] * t);\n+      incr += val[0] + (val[1] + val[2] * t);\n     }\n-    incr *= tpower;\n+    // incr *= tpower;\n     print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n"
+                },
+                {
+                    "date": 1642426662445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n       // incr += val[0] * cos(val[1] + val[2] * t);\n-      incr += val[0] + (val[1] + val[2] * t);\n+      incr += val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n     print(incr);\n \n"
+                },
+                {
+                    "date": 1642426740231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n       // incr += val[0] * cos(val[1] + val[2] * t);\n-      incr += val[0] + val[1] + val[2];\n+      incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n     print(incr);\n \n"
+                },
+                {
+                    "date": 1642426875993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,14 +10,14 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n-      // print(val[0]);\n+      print(val[0]);\n       // incr += val[0] * cos(val[1] + val[2] * t);\n-      incr = val[0] + val[1] + val[2];\n+      // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n-    print(incr);\n+    // print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n"
+                },
+                {
+                    "date": 1642426964175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,13 +11,14 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       print(val[0]);\n+      incr += val[0];\n       // incr += val[0] * cos(val[1] + val[2] * t);\n       // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n-    // print(incr);\n+    print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n"
+                },
+                {
+                    "date": 1642426982887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n-      print(val[0]);\n+      // print(val[0]);\n       incr += val[0];\n       // incr += val[0] * cos(val[1] + val[2] * t);\n       // incr = val[0] + val[1] + val[2];\n     }\n"
+                },
+                {
+                    "date": 1642427092590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n-      incr += val[0];\n+      incr += cos(val[0]);\n       // incr += val[0] * cos(val[1] + val[2] * t);\n       // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n"
+                },
+                {
+                    "date": 1642427163651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n-      incr += cos(val[0]);\n+      incr += val[2] * t;\n       // incr += val[0] * cos(val[1] + val[2] * t);\n       // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n"
+                },
+                {
+                    "date": 1642427300016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,9 @@\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n-      incr += val[2] * t;\n-      // incr += val[0] * cos(val[1] + val[2] * t);\n+      incr += val[0] * cos(val[1] + val[2] * t);\n       // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n     print(incr);\n"
+                },
+                {
+                    "date": 1642427501793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n     double incr = 0.0;\n     for (var val in lst) {\n       // print(val[0]);\n       incr += val[0] * cos(val[1] + val[2] * t);\n-      // incr = val[0] + val[1] + val[2];\n     }\n     // incr *= tpower;\n     print(incr);\n \n@@ -24,12 +23,11 @@\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n       // print('incr = $incr');\n-    } else {\n-      coord += incr;\n-      tpower *= t;\n     }\n+    coord += incr;\n+    tpower *= t;\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n"
+                },
+                {
+                    "date": 1642427521672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     for (var val in lst) {\n       // print(val[0]);\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n-    // incr *= tpower;\n+    incr *= tpower;\n     print(incr);\n \n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n"
+                },
+                {
+                    "date": 1642427630476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,11 @@\n       // print(val[0]);\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n     incr *= tpower;\n-    print(incr);\n \n+    tpower *= t;\n+\n     // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n     // incr += val[0][0] + val[0][1] + val[0][2];\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n@@ -25,9 +26,9 @@\n       incr = incr % PI2;\n       // print('incr = $incr');\n     }\n     coord += incr;\n-    tpower *= t;\n+    print(incr);\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n"
+                },
+                {
+                    "date": 1642427675215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     // print('_incr = $incr');\n     // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n-      // print('incr = $incr');\n+      print('incr = $incr');\n     }\n     coord += incr;\n     print(incr);\n   }\n"
+                },
+                {
+                    "date": 1642427724535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n }\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n-  double lon = vsopFormula(model[0], t, false); //true\n+  double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n   print('t lon, lat, rad $t $lon, $lat, $rad');\n"
+                },
+                {
+                    "date": 1642428047810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,21 +14,16 @@\n       // print(val[0]);\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n     incr *= tpower;\n-\n     tpower *= t;\n+    print(incr);\n \n-    // incr += tpower * (val[0][0] * cos(val[0][1] + val[0][2] * t));\n-    // incr += val[0][0] + val[0][1] + val[0][2];\n-    // print('_incr = $incr');\n-    // print('0_incr = $incr');\n     if (clampAngle == true) {\n       incr = incr % PI2;\n-      print('incr = $incr');\n+      print('incr_false = $incr');\n     }\n     coord += incr;\n-    print(incr);\n   }\n   // print('__incr = $incr');\n   // print('coord = $coord');\n   return coord;\n"
+                },
+                {
+                    "date": 1642428130365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n     incr *= tpower;\n     tpower *= t;\n-    print(incr);\n+    print('incr $incr tpowder $tpower');\n \n     if (clampAngle == true) {\n       incr = incr % PI2;\n       print('incr_false = $incr');\n"
+                },
+                {
+                    "date": 1642428424926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,13 +30,14 @@\n }\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n+  print('tt = $t');\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  print('t lon, lat, rad $t $lon, $lat, $rad');\n+  // print('t lon, lat, rad $t $lon, $lat, $rad');\n   return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n"
+                },
+                {
+                    "date": 1642428654275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n     incr *= tpower;\n     tpower *= t;\n-    print('incr $incr tpowder $tpower');\n+    // print('incr $incr tpowder $tpower');\n \n     if (clampAngle == true) {\n       incr = incr % PI2;\n       print('incr_false = $incr');\n"
+                },
+                {
+                    "date": 1642429218683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import 'dart:math';\n import 'constants.dart';\n import 'classes.dart';\n+import 'func.dart';\n import 'rotateVector.dart';\n \n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n@@ -18,9 +19,9 @@\n     tpower *= t;\n     // print('incr $incr tpowder $tpower');\n \n     if (clampAngle == true) {\n-      incr = incr % PI2;\n+      incr = fmod(incr, PI2);\n       print('incr_false = $incr');\n     }\n     coord += incr;\n   }\n"
+                },
+                {
+                    "date": 1642429404531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,27 +7,21 @@\n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n \n-  // incr = tpower * sum(A * cos(B + C*t) for (A, B, C) in series)\n   for (var lst in formula) {\n     double incr = 0.0;\n     for (var val in lst) {\n-      // print(val[0]);\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n-    incr *= tpower;\n-    tpower *= t;\n-    // print('incr $incr tpowder $tpower');\n-\n     if (clampAngle == true) {\n       incr = fmod(incr, PI2);\n       print('incr_false = $incr');\n     }\n+    incr *= tpower;\n+    tpower *= t;\n     coord += incr;\n   }\n-  // print('__incr = $incr');\n-  // print('coord = $coord');\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642429429280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,16 +12,19 @@\n     double incr = 0.0;\n     for (var val in lst) {\n       incr += val[0] * cos(val[1] + val[2] * t);\n     }\n+    incr *= tpower;\n+    tpower *= t;\n+\n     if (clampAngle == true) {\n       incr = fmod(incr, PI2);\n       print('incr_false = $incr');\n     }\n-    incr *= tpower;\n-    tpower *= t;\n     coord += incr;\n   }\n+  // print('__incr = $incr');\n+  // print('coord = $coord');\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642429458607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,10 +21,8 @@\n       print('incr_false = $incr');\n     }\n     coord += incr;\n   }\n-  // print('__incr = $incr');\n-  // print('coord = $coord');\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n"
+                },
+                {
+                    "date": 1642429469630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n }\n \n Vector calcVsop(model, time) {\n   double t = time / DAYS_PER_MILLENNIUM;\n-  print('tt = $t');\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n"
+                },
+                {
+                    "date": 1642429535846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n     tpower *= t;\n \n     if (clampAngle == true) {\n       incr = fmod(incr, PI2);\n-      print('incr_false = $incr');\n     }\n     coord += incr;\n   }\n   return coord;\n"
+                },
+                {
+                    "date": 1642430081199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,8 @@\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  // print('t lon, lat, rad $t $lon, $lat, $rad');\n   return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n"
+                },
+                {
+                    "date": 1642567128739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,14 +24,14 @@\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n-  double t = time / DAYS_PER_MILLENNIUM;\n+  double t = time.tt / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  return vsopRotate(eclip).ToAstroVector(time);\n+  return vsopRotate(eclip).ToAstroVector(time.tt);\n }\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n"
+                },
+                {
+                    "date": 1642567338882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,14 +24,14 @@\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n-  double t = time.tt / DAYS_PER_MILLENNIUM;\n+  double t = time / DAYS_PER_MILLENNIUM;\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  return vsopRotate(eclip).ToAstroVector(time.tt);\n+  return vsopRotate(eclip).ToAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n"
+                },
+                {
+                    "date": 1642608092023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n-  return vsopRotate(eclip).ToAstroVector(time);\n+  return vsopRotate(eclip).toAstroVector(time);\n }\n \n // def CalcVsopPosVel(model, tt):\n //     t = tt / DAYS_PER_MILLENNIUM\n"
+                },
+                {
+                    "date": 1642608538146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,17 +16,17 @@\n     incr *= tpower;\n     tpower *= t;\n \n     if (clampAngle == true) {\n-      incr = fmod(incr, PI2);\n+      incr = fmod(incr, pi2);\n     }\n     coord += incr;\n   }\n   return coord;\n }\n \n Vector calcVsop(model, time) {\n-  double t = time / DAYS_PER_MILLENNIUM;\n+  double t = time / daysPerMillenium;\n   double lon = vsopFormula(model[0], t, true); //true\n   double lat = vsopFormula(model[1], t, false);\n   double rad = vsopFormula(model[2], t, false);\n   TerseVector eclip = vsopSphereToRect(lon, lat, rad);\n"
+                },
+                {
+                    "date": 1642647141811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'dart:math';\n import 'constants.dart';\n import 'classes.dart';\n import 'func.dart';\n-import 'rotateVector.dart';\n+import 'rotate_vector.dart';\n \n double vsopFormula(formula, t, clampAngle) {\n   double tpower = 1.0;\n   double coord = 0.0;\n"
+                }
+            ],
+            "date": 1642135336583,
+            "name": "Commit-0",
+            "content": "// from math import degrees,cos, fmod, sin, atan2, sqrt\n// from vsop.src.classes import Vector, EclipticCoordinates, TerseVector, body_state_t\n// from vsop.src.constants import DAYS_PER_MILLENNIUM, PI2\n// from vsop.src.rotateVector import VsopRotate, VsopSphereToRect\nimport 'dart:math';\nimport 'constants.dart';\nimport 'classes.dart';\nimport 'rotateVector.dart';\nimport 'package:collection/collection.dart';\n\n\ndouble VsopFormula(formula, t, clamp_angle) {\n    double tpower = 1.0;\n    double coord = 0.0;\n    for (var series in formula) \n        {\n          double incr = tpower * (A * cos(B + C*t) for ((A, B, C) in series));\n          if (clamp_angle) {\n            // Longitude angles can be hundreds of radians.\n            //Improve precision by keeping each increment within [-2*pi, +2*pi].\n            var incr = fmod(incr, PI2);}\n        double coord += incr;\n        double tpower *= t;}\n    return coord;\n}\n\n// def CalcVsop(model, time):\n//     t = time.tt / DAYS_PER_MILLENNIUM\n//     lon = VsopFormula(model[0], t, True)\n//     lat = VsopFormula(model[1], t, False)\n//     rad = VsopFormula(model[2], t, False)\n//     eclip = VsopSphereToRect(lon, lat, rad)\n//     return VsopRotate(eclip).ToAstroVector(time)\n\n// def CalcVsopPosVel(model, tt):\n//     t = tt / DAYS_PER_MILLENNIUM\n\n//     lon = VsopFormula(model[0], t, True)\n//     lat = VsopFormula(model[1], t, False)\n//     rad = VsopFormula(model[2], t, False)\n\n//     (dlon_dt, dlat_dt, drad_dt) = [VsopDeriv(formula, t) for formula in model]\n\n//     coslon = cos(lon)\n//     sinlon = sin(lon)\n//     coslat = cos(lat)\n//     sinlat = sin(lat)\n\n//     vx = (\n//         + (drad_dt * coslat * coslon)\n//         - (rad * sinlat * coslon * dlat_dt)\n//         - (rad * coslat * sinlon * dlon_dt)\n//     )\n\n//     vy = (\n//         + (drad_dt * coslat * sinlon)\n//         - (rad * sinlat * sinlon * dlat_dt)\n//         + (rad * coslat * coslon * dlon_dt)\n//     )\n\n//     vz = (\n//         + (drad_dt * sinlat)\n//         + (rad * coslat * dlat_dt)\n//     )\n\n//     eclip_pos = VsopSphereToRect(lon, lat, rad)\n\n//     # Convert speed units from [AU/millennium] to [AU/day].\n//     eclip_vel = TerseVector(vx, vy, vz) / DAYS_PER_MILLENNIUM\n\n//     # Rotate the vectors from ecliptic to equatorial coordinates.\n//     equ_pos = VsopRotate(eclip_pos)\n//     equ_vel = VsopRotate(eclip_vel)\n//     return body_state_t(tt, equ_pos, equ_vel)\n\n\n// def VsopDeriv(formula, t):\n//     tpower = 1      # t**s\n//     dpower = 0      # t**(s-1)\n//     deriv = 0\n//     s = 0\n//     for series in formula:\n//         sin_sum = 0\n//         cos_sum = 0\n//         for (ampl, phas, freq) in series:\n//             angle = phas + (t * freq)\n//             sin_sum += ampl * freq * sin(angle)\n//             if s > 0:\n//                 cos_sum += ampl * cos(angle)\n//         deriv += (s * dpower * cos_sum) - (tpower * sin_sum)\n//         dpower = tpower\n//         tpower *= t\n//         s += 1\n//     return deriv\n\n\n// def VsopHelioDistance(model, time):\n//     # The caller only wants to know the distance between the planet and the Sun.\n//     # So we only need to calculate the radial component of the spherical coordinates.\n//     # There is no need to translate coordinates.\n//     return VsopFormula(model[2], time.tt / DAYS_PER_MILLENNIUM, False)"
+        }
+    ]
+}

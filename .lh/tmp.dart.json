@@ -1,0 +1,46 @@
+{
+    "sourceFile": "tmp.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1642128613084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642128642072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import 'dart:io';\n \n void main() {\n-  List<List<dynamic>> pluto_statetable = [\n+  List<List<dynamic>> pluto = [\n     [\n       -73.0,\n       [-26.11, -14.3761681778250]\n     ]\n   ];\n+  print(pluto);\n }\n"
+                },
+                {
+                    "date": 1642128667249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n       -73.0,\n       [-26.11, -14.3761681778250]\n     ]\n   ];\n-  print(pluto);\n+  print(pluto.runtimeType);\n }\n"
+                },
+                {
+                    "date": 1642128696411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n void main() {\n   List<List<dynamic>> pluto = [\n     [\n-      -73.0,\n-      [-26.11, -14.3761681778250]\n+      0,\n+      [1, 2]\n     ]\n   ];\n   print(pluto.runtimeType);\n }\n"
+                },
+                {
+                    "date": 1642130565680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n void main() {\n   List<List<dynamic>> pluto = [\n     [\n-      0,\n-      [1, 2]\n+      -73.0,\n+      [-26.11, -14.3761681778250]\n     ]\n   ];\n-  print(pluto.runtimeType);\n+  print(pluto);\n }\n"
+                },
+                {
+                    "date": 1642135463130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,9 @@\n-import 'dart:io';\n+import 'dart:math';\n \n void main() {\n-  List<List<dynamic>> pluto = [\n-    [\n-      -73.0,\n-      [-26.11, -14.3761681778250]\n-    ]\n-  ];\n-  print(pluto);\n+  var A=1;var B=2;var C=3; var t = 1;\n+\n+  double incr = (A * cos(B + C*t) for ((A, B, C) in series));\n+\n+  print(incr);\n }\n"
+                },
+                {
+                    "date": 1642135768565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,13 @@\n import 'dart:math';\n \n void main() {\n-  var A=1;var B=2;var C=3; var t = 1;\n+  var A = 1;\n+  var B = 2;\n+  var C = 3;\n+  var t = 1;\n+  List series = [A, B, C];\n \n-  double incr = (A * cos(B + C*t) for ((A, B, C) in series));\n+  // double incr = (A * cos(B + C*t) for ((A, B, C) in series));\n \n-  print(incr);\n+  // print(incr);\n }\n"
+                },
+                {
+                    "date": 1642139191154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,21 @@\n import 'dart:math';\n \n void main() {\n-  var A = 1;\n-  var B = 2;\n-  var C = 3;\n-  var t = 1;\n-  List series = [A, B, C];\n+  Map _Array1(int xmin, int xmax) {\n+    Map arr1 = {for (var i = xmin; i < xmax + 1; i++) i: '0j'};\n+    return arr1;\n+  }\n \n+  Map _Array2(int xmin, int xmax, int ymin, int ymax) {\n+    Map _arr1 = _Array1(ymin, ymax);\n+    Map arr2 = {for (var i = xmin; i < xmax + 1; i++) i: _arr1};\n+    return arr2;\n+  }\n+\n+  var z = _Array2(-6, 6, 1, 4);\n+  double DLAM = 13.902 * z.imag;\n+\n   // double incr = (A * cos(B + C*t) for ((A, B, C) in series));\n \n   // print(incr);\n }\n"
+                }
+            ],
+            "date": 1642128613084,
+            "name": "Commit-0",
+            "content": "import 'dart:io';\n\nvoid main() {\n  List<List<dynamic>> pluto_statetable = [\n    [\n      -73.0,\n      [-26.11, -14.3761681778250]\n    ]\n  ];\n}\n"
+        }
+    ]
+}

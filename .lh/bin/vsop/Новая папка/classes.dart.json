@@ -1,0 +1,18 @@
+{
+    "sourceFile": "bin/vsop/Новая папка/classes.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642125704391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642125704391,
+            "name": "Commit-0",
+            "content": "// ignore_for_file: unnecessary_getters_setters, hash_and_equals\n\nimport 'dart:math' as math;\n\nclass Complex {\n  num _real;\n  num _imag;\n\n  // 1- Here we define different ways to build a complex number:\n  // constructors:\n  Complex([this._real = 0, this._imag = 0]);\n  Complex.im(num imag) : this(0, imag);\n  Complex.re(num real) : this(real, 0);\n  // 2- The normal utility methods to get and set the real and\n  // imaginary part, to get the absolute value and the angle, to\n  //  compare two complex numbers:\n  num get real => _real;\n  set real(num value) => _real = value;\n  num get imag => _imag;\n  set imag(num value) => _imag = value;\n  num get abs => math.sqrt(real * real + imag * imag);\n  num get angle => math.atan2(imag, real);\n\n  @override\n  bool operator ==(other) {\n    if (other is! Complex) {\n      return false;\n    }\n    return real == other.real && imag == other.imag;\n  }\n\n  @override\n  String toString() {\n    if (_imag >= 0) {\n      return '$_real + ${_imag}i';\n    }\n    return '$_real - ${_imag.abs()}i';\n  }\n\n  // 3- operator overloading:\n  // The basic operations for adding, multiplying, subtraction and    //\n  //  division are defined as overloading of the operators +, *, - and /\n  Complex operator +(Complex x) {\n    return Complex(_real + x.real, _imag + x.imag);\n  }\n\n  Complex operator -(var x) {\n    if (x is Complex) {\n      return Complex(real - x.real, imag - x.imag);\n    } else if (x is num) {\n      _real -= x;\n      return this;\n    }\n    throw 'Not a number';\n  }\n\n  Complex operator *(var x) {\n    if (x is Complex) {\n      num realAux = (real * x.real - imag * x.imag);\n      num imagAux = (imag * x.real + real * x.imag);\n      return Complex(realAux, imagAux);\n    } else if (x is num) {\n      return Complex(real * x, imag * x);\n    }\n    throw 'Not a number';\n  }\n\n  Complex operator /(var x) {\n    if (x is Complex) {\n      num realAux =\n          (real * x.real + imag * x.imag) / (x.real * x.real + x.imag * x.imag);\n      num imagAux =\n          (imag * x.real - real * x.imag) / (x.real * x.real + x.imag * x.imag);\n      return Complex(realAux, imagAux);\n    } else if (x is num) {\n      return Complex(real / x, imag / x);\n    }\n    throw 'Not a number';\n  }\n\n  // 4- Here we define the same operations as methods:\n  static Complex add(Complex c1, Complex c2) {\n    num rr = c1.real + c2.real;\n    num ii = c1.imag + c2.imag;\n    return Complex(rr, ii);\n  }\n\n  static Complex subtract(Complex c1, Complex c2) {\n    num rr = c1.real - c2.real;\n    num ii = c1.imag - c2.imag;\n    return Complex(rr, ii);\n  }\n\n  static Complex multiply(Complex c1, Complex c2) {\n    num rr = c1.real * c2.real - c1.imag * c2.imag;\n    num ii = c1.real * c2.imag + c1.imag * c2.real;\n    return Complex(rr, ii);\n  }\n\n  static Complex divide(Complex c1, Complex c2) {\n    num real = (c1.real * c2.real + c1.imag * c2.imag) /\n        (c2.real * c2.real + c2.imag * c2.imag);\n    num imag = (c1.imag * c2.real - c1.real * c2.imag) /\n        (c2.real * c2.real + c2.imag * c2.imag);\n    return Complex(real, imag);\n  }\n}\n"
+        }
+    ]
+}

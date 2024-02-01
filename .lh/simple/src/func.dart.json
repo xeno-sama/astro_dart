@@ -1,0 +1,26 @@
+{
+    "sourceFile": "simple/src/func.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1641963073003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641965272420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,13 +18,13 @@\n   }\n   return t;\n }\n \n-List<int> RA_to_time(double RA) {\n-  var RA_h = (RA ~/ 15).toInt();\n-  var RA_m = ((RA / 15 - RA_h) * 60 ~/ 1).toInt();\n-  var RA_s = ((RA / 15 - RA_h) * 60 % 1 * 60).toInt();\n-  return [RA_h, RA_m, RA_s];\n+List<int> timeRA(double RA) {\n+  var hRA = (RA ~/ 15).toInt();\n+  var mRA = ((RA / 15 - hRA) * 60 ~/ 1).toInt();\n+  var sRA = ((RA / 15 - hRA) * 60 % 1 * 60).toInt();\n+  return [hRA, mRA, sRA];\n }\n \n double numDate(int y, int m, int D, int hour, int minute) {\n   int _d = (367 * y -\n@@ -33,19 +33,19 @@\n           275 * m ~/ 9 +\n           D -\n           730515)\n       .toInt();\n-  double UT = hour + (minute / 60);\n-  double d = _d + UT / 24;\n+  double ut = hour + (minute / 60);\n+  double d = _d + ut / 24;\n   return d;\n }\n \n double localSidTime(int hour, int minute, L, LON) {\n-  double UT = hour + (minute / 60);\n-  double GMST0 = time_24(L / 15 + 12); // L солнечная долгота\n-  double SIDTIME = GMST0 + UT + LON / 15;\n-  double SIDTIME_deg = SIDTIME * 15; //Звездное время в градусах\n-  return SIDTIME_deg;\n+  double ut = hour + (minute / 60);\n+  double gmst0 = time_24(L / 15 + 12); // L солнечная долгота\n+  double sidTime = gmst0 + ut + LON / 15;\n+  double sidTimeDeg = sidTime * 15; //Звездное время в градусах\n+  return sidTimeDeg;\n }\n \n Map<int, String> test(double x) {\n   var map2 = {x.toInt(): \"Tom\", 2: \"Bob\", 3: \"Sam\"};\n"
+                },
+                {
+                    "date": 1641965305593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,12 @@\n   }\n   return t;\n }\n \n-List<int> timeRA(double RA) {\n-  var hRA = (RA ~/ 15).toInt();\n-  var mRA = ((RA / 15 - hRA) * 60 ~/ 1).toInt();\n-  var sRA = ((RA / 15 - hRA) * 60 % 1 * 60).toInt();\n+List<int> timeRA(double ra) {\n+  var hRA = (ra ~/ 15).toInt();\n+  var mRA = ((ra / 15 - hRA) * 60 ~/ 1).toInt();\n+  var sRA = ((ra / 15 - hRA) * 60 % 1 * 60).toInt();\n   return [hRA, mRA, sRA];\n }\n \n double numDate(int y, int m, int D, int hour, int minute) {\n@@ -38,12 +38,12 @@\n   double d = _d + ut / 24;\n   return d;\n }\n \n-double localSidTime(int hour, int minute, L, LON) {\n+double localSidTime(int hour, int minute, L, lon) {\n   double ut = hour + (minute / 60);\n   double gmst0 = time_24(L / 15 + 12); // L солнечная долгота\n-  double sidTime = gmst0 + ut + LON / 15;\n+  double sidTime = gmst0 + ut + lon / 15;\n   double sidTimeDeg = sidTime * 15; //Звездное время в градусах\n   return sidTimeDeg;\n }\n \n"
+                }
+            ],
+            "date": 1641963073003,
+            "name": "Commit-0",
+            "content": "import 'dart:math';\n\ndouble radians(double rad) => rad * pi / 180;\ndouble degrees(double grad) => grad / pi * 180;\n\ndouble deg_360(double x) {\n  var rv = x - (x / 360.0).truncate() * 360.0;\n  if (rv < 0.0) {\n    rv += 360.0;\n  }\n  return rv;\n}\n\ndouble time_24(double t0) {\n  var t = t0 - (t0 / 24.0).truncate() * 24.0;\n  if (t < 0.0) {\n    t += 24.0;\n  }\n  return t;\n}\n\nList<int> RA_to_time(double RA) {\n  var RA_h = (RA ~/ 15).toInt();\n  var RA_m = ((RA / 15 - RA_h) * 60 ~/ 1).toInt();\n  var RA_s = ((RA / 15 - RA_h) * 60 % 1 * 60).toInt();\n  return [RA_h, RA_m, RA_s];\n}\n\ndouble numDate(int y, int m, int D, int hour, int minute) {\n  int _d = (367 * y -\n          7 * (y + ((m + 9) / 12)).toInt() ~/ 4 -\n          3 * ((y + ((m - 9) / 7)).toInt() / 100 + 1) / 4 +\n          275 * m ~/ 9 +\n          D -\n          730515)\n      .toInt();\n  double UT = hour + (minute / 60);\n  double d = _d + UT / 24;\n  return d;\n}\n\ndouble localSidTime(int hour, int minute, L, LON) {\n  double UT = hour + (minute / 60);\n  double GMST0 = time_24(L / 15 + 12); // L солнечная долгота\n  double SIDTIME = GMST0 + UT + LON / 15;\n  double SIDTIME_deg = SIDTIME * 15; //Звездное время в градусах\n  return SIDTIME_deg;\n}\n\nMap<int, String> test(double x) {\n  var map2 = {x.toInt(): \"Tom\", 2: \"Bob\", 3: \"Sam\"};\n  return map2;\n}\n"
+        }
+    ]
+}

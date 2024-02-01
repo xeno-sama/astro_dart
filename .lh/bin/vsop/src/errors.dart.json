@@ -1,0 +1,22 @@
+{
+    "sourceFile": "bin/vsop/src/errors.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642130614781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642132460128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+// ------\n+// Ready?\n+// ------\n+\n /// классы ошибки\n class Error {\n   late Exception E;\n   Error(this.E);\n@@ -8,47 +12,41 @@\n \n //     def __init__(self, message):\n //         Exception.__init__(self, message)\n \n-\n // class DateTimeFormatError(Error):\n //     \"\"\"The syntax of a UTC date/time string was not valid, or it contains invalid values.\"\"\"\n \n //     def __init__(self, text):\n //         Error.__init__(\n //             self, 'The date/time string is not valid: \"{}\"'.format(text))\n \n-\n // class EarthNotAllowedError(Error):\n //     \"\"\"The Earth is not allowed as the celestial body in this calculation.\"\"\"\n \n //     def __init__(self):\n //         Error.__init__(self, 'The Earth is not allowed as the body.')\n \n-\n // class InvalidBodyError(Error):\n //     \"\"\"The celestial body is not allowed for this calculation.\"\"\"\n \n //     def __init__(self):\n //         Error.__init__(self, 'Invalid astronomical body.')\n \n-\n // class BadVectorError(Error):\n //     \"\"\"A vector magnitude is too small to have a direction in space.\"\"\"\n \n //     def __init__(self):\n //         Error.__init__(self, 'Vector is too small to have a direction.')\n \n-\n // class InternalError(Error):\n //     \"\"\"An internal error occured that should be reported as a bug.\"\"\"\n \n //     def __init__(self):\n //         Error.__init__(\n //             self, 'Internal error - please report issue at https://github.com/cosinekitty/astronomy/issues')\n \n-\n // class NoConvergeError(Error):\n //     \"\"\"A numeric solver did not converge.  \"\"\"\n \n //     def __init__(self):\n-//         Error.__init__(self, 'Numeric solver did not converge ')\n\\ No newline at end of file\n+//         Error.__init__(self, 'Numeric solver did not converge ')\n"
+                }
+            ],
+            "date": 1642130614781,
+            "name": "Commit-0",
+            "content": "/// классы ошибки\nclass Error {\n  late Exception E;\n  Error(this.E);\n}\n// class Error(Exception):\n//     \"\"\"Indicates an error in an astronomical calculation.\"\"\"\n\n//     def __init__(self, message):\n//         Exception.__init__(self, message)\n\n\n// class DateTimeFormatError(Error):\n//     \"\"\"The syntax of a UTC date/time string was not valid, or it contains invalid values.\"\"\"\n\n//     def __init__(self, text):\n//         Error.__init__(\n//             self, 'The date/time string is not valid: \"{}\"'.format(text))\n\n\n// class EarthNotAllowedError(Error):\n//     \"\"\"The Earth is not allowed as the celestial body in this calculation.\"\"\"\n\n//     def __init__(self):\n//         Error.__init__(self, 'The Earth is not allowed as the body.')\n\n\n// class InvalidBodyError(Error):\n//     \"\"\"The celestial body is not allowed for this calculation.\"\"\"\n\n//     def __init__(self):\n//         Error.__init__(self, 'Invalid astronomical body.')\n\n\n// class BadVectorError(Error):\n//     \"\"\"A vector magnitude is too small to have a direction in space.\"\"\"\n\n//     def __init__(self):\n//         Error.__init__(self, 'Vector is too small to have a direction.')\n\n\n// class InternalError(Error):\n//     \"\"\"An internal error occured that should be reported as a bug.\"\"\"\n\n//     def __init__(self):\n//         Error.__init__(\n//             self, 'Internal error - please report issue at https://github.com/cosinekitty/astronomy/issues')\n\n\n// class NoConvergeError(Error):\n//     \"\"\"A numeric solver did not converge.  \"\"\"\n\n//     def __init__(self):\n//         Error.__init__(self, 'Numeric solver did not converge ')"
+        }
+    ]
+}

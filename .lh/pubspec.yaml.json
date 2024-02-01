@@ -1,0 +1,26 @@
+{
+    "sourceFile": "pubspec.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1641790458545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641796964831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n environment:\n   sdk: '>=2.15.1 <3.0.0'\n \n \n-dependencies:\n-  complex: ^0.7.2\n+# dependencies:\n+#   complex: ^0.7.2\n \n dev_dependencies:\n   lints: ^1.0.0\n"
+                },
+                {
+                    "date": 1642513275661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n environment:\n   sdk: '>=2.15.1 <3.0.0'\n \n \n-# dependencies:\n-#   complex: ^0.7.2\n+dependencies:\n+  complex: ^0.7.2\n \n dev_dependencies:\n   lints: ^1.0.0\n"
+                }
+            ],
+            "date": 1641790458545,
+            "name": "Commit-0",
+            "content": "name: astro_mc_dart\ndescription: A simple command-line application.\nversion: 1.0.0\n\nenvironment:\n  sdk: '>=2.15.1 <3.0.0'\n\n\ndependencies:\n  complex: ^0.7.2\n\ndev_dependencies:\n  lints: ^1.0.0\n"
+        }
+    ]
+}

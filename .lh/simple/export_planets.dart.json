@@ -1,0 +1,18 @@
+{
+    "sourceFile": "simple/export_planets.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1641962591380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1641962591380,
+            "name": "Commit-0",
+            "content": "export 'planets/export_funcs.dart';\n\nexport 'planets/calc_sun.dart';\nexport 'planets/calc_moon.dart';\nexport 'planets/calc_mercury.dart';\nexport 'planets/calc_venus.dart';\nexport 'planets/calc_mars.dart';\nexport 'planets/calc_jupiter.dart';\nexport 'planets/calc_saturn.dart';\nexport 'planets/calc_uranus.dart';\nexport 'planets/calc_neptune.dart';\nexport 'planets/calc_pluto.dart';\n"
+        }
+    ]
+}

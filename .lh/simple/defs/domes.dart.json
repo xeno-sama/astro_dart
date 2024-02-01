@@ -1,0 +1,82 @@
+{
+    "sourceFile": "simple/defs/domes.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1641636141696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641636901297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,24 +61,24 @@\n   // }\n   //   return [dom1, dom2];\n   // } //должно работать чтобы упростить нижние while\n \n-  while (ii < asc) {\n+  if (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-  while (iii < asc) {\n+  if (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   }\n-  while (xi < mc) {\n+  if (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n   }\n-  while (xii < mc) {\n+  if (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n   }\n"
+                },
+                {
+                    "date": 1641637028625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,27 +61,31 @@\n   // }\n   //   return [dom1, dom2];\n   // } //должно работать чтобы упростить нижние while\n \n-  if (ii < asc) {\n+  while (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n+    break;\n   }\n-  if (iii < asc) {\n+  while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n+    break;\n   }\n-  if (xi < mc) {\n+  while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n+    break;\n   }\n-  if (xii < mc) {\n+  while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n+    break;\n   }\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641637070636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,9 +83,8 @@\n   while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n-    break;\n   }\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641637125137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,9 @@\n   while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n+    break;\n   }\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641637179650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,14 +61,20 @@\n   // }\n   //   return [dom1, dom2];\n   // } //должно работать чтобы упростить нижние while\n \n-  while (ii < asc) {\n+  // while (ii < asc) {\n+  //   ii += 180;\n+  //   ii > 360 ? ii = ii - 360 : ii;\n+  //   ii > 180 ? viii = ii - 180 : viii = ii + 180;\n+  //   break;\n+  // }\n+  do {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n-    break;\n-  }\n+  } while (ii < asc);\n+\n   while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n"
+                },
+                {
+                    "date": 1641637276314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,14 +73,14 @@\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   } while (ii < asc);\n \n-  while (iii < asc) {\n+  do {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-    break;\n-  }\n+  } while (iii < asc);\n+\n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n"
+                },
+                {
+                    "date": 1641637314466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,19 +79,18 @@\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   } while (iii < asc);\n \n-  while (xi < mc) {\n+  do {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n-    break;\n-  }\n-  while (xii < mc) {\n+  } while (xi < mc);\n+\n+  do {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n-    break;\n-  }\n+  } while (xii < mc);\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641637574566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,18 +79,20 @@\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   } while (iii < asc);\n \n-  do {\n+  while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n-  } while (xi < mc);\n+    break;\n+  }\n \n-  do {\n+  while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n-  } while (xii < mc);\n+    break;\n+  }\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641637764881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n import 'dart:math';\n import 'func.dart';\n \n-List<double> domes(int Y, int M, int D, int h, int m, double LON, double LAT) {\n-  var d = num_date(Y, M, D, h, m);\n+List<double> domes(\n+    int Y, int M, int D, int h, int m, double d, double LON, double LAT) {\n   var ecl = 23.4393 - 3.563E-7 * d;\n \n   var w_sun = 282.9404 + 4.70935E-5 * d;\n   var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n@@ -21,8 +21,9 @@\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n+  print(asc);\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n"
+                },
+                {
+                    "date": 1641637926605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n-  print(asc);\n+  print('asc $asc');\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n"
+                },
+                {
+                    "date": 1641638021526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n-  print('asc $asc');\n+  print('AS -- $asc');\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n"
+                },
+                {
+                    "date": 1641638254704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n-  print('AS -- $asc');\n+  print('AS  $asc');\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n"
+                },
+                {
+                    "date": 1641638490635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,15 @@\n import 'dart:math';\n import 'func.dart';\n \n List<double> domes(\n-    int Y, int M, int D, int h, int m, double d, double LON, double LAT) {\n+    int Y, int M, int D, int h, int m, double LON, double LAT, double d) {\n   var ecl = 23.4393 - 3.563E-7 * d;\n \n   var w_sun = 282.9404 + 4.70935E-5 * d;\n   var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n   var L_sun = deg_360(w_sun + M_sun); // Звездное время\n-\n+  print('AS  $L_sun');\n   var RA = lst(h, m, L_sun, LON); // прямое восхождение\n \n   var pv = radians(RA);\n   var lat = radians(LAT);\n"
+                },
+                {
+                    "date": 1641638566260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n   // формула для МС\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n-  var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n+  var asc =\n+      deg_360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n   print('AS  $asc');\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n"
+                },
+                {
+                    "date": 1641638660140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n   var w_sun = 282.9404 + 4.70935E-5 * d;\n   var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n   var L_sun = deg_360(w_sun + M_sun); // Звездное время\n-  print('AS  $L_sun');\n+\n   var RA = lst(h, m, L_sun, LON); // прямое восхождение\n \n   var pv = radians(RA);\n   var lat = radians(LAT);\n@@ -22,9 +22,8 @@\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc =\n       deg_360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n-  print('AS  $asc');\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n@@ -63,38 +62,30 @@\n   // }\n   //   return [dom1, dom2];\n   // } //должно работать чтобы упростить нижние while\n \n-  // while (ii < asc) {\n-  //   ii += 180;\n-  //   ii > 360 ? ii = ii - 360 : ii;\n-  //   ii > 180 ? viii = ii - 180 : viii = ii + 180;\n-  //   break;\n-  // }\n-  do {\n+  while (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n-  } while (ii < asc);\n+  }\n \n-  do {\n+  while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-  } while (iii < asc);\n+  }\n \n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n-    break;\n   }\n \n   while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n-    break;\n   }\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1641638764093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,18 +52,8 @@\n \n   asc < 180 ? ds = asc + 180 : asc;\n   asc >= 180 ? ds = asc - 180 : asc;\n \n-  // List<double> getDomes(double dom1, double domCompare) {\n-  //   var dom2;\n-  //   while (dom1 < asc) {\n-  //   dom1 += 180;\n-  //   dom1 > 360 ? dom1 = dom1 - 360 : dom1;\n-  //   dom1 > 180 ? dom2 = dom1 - 180 : dom2 = dom1 + 180;\n-  // }\n-  //   return [dom1, dom2];\n-  // } //должно работать чтобы упростить нижние while\n-\n   while (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n"
+                }
+            ],
+            "date": 1641636141696,
+            "name": "Commit-0",
+            "content": "// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables\n\nimport 'dart:math';\nimport 'func.dart';\n\nList<double> domes(int Y, int M, int D, int h, int m, double LON, double LAT) {\n  var d = num_date(Y, M, D, h, m);\n  var ecl = 23.4393 - 3.563E-7 * d;\n\n  var w_sun = 282.9404 + 4.70935E-5 * d;\n  var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n  var L_sun = deg_360(w_sun + M_sun); // Звездное время\n\n  var RA = lst(h, m, L_sun, LON); // прямое восхождение\n\n  var pv = radians(RA);\n  var lat = radians(LAT);\n  var e = radians(ecl); // склонение эклиптики в радианах\n\n  // формула для МС\n  var mc = degrees(atan(tan(pv) / cos(e)));\n  var ic, v, vi, ds, viii, ix;\n  // формула для AS\n  var asc = degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e))));\n\n  // вспомогательный угол для куспидов\n  var c = acos(-tan(e) * sin(pv) * tan(lat));\n\n  var ii = degrees(\n      atan(cos(pv + c / 3) / -(tan(lat) * sin(e) + sin(pv + c / 3) * cos(e))));\n  var iii = degrees(atan(cos(pv + 2 * c / 3) /\n      -(tan(lat) * sin(e) + sin(pv + 2 * c / 3) * cos(e))));\n  var xi = degrees(atan(cos(pv - 2 * c / 3) /\n      -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n  var xii = degrees(\n      atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n\n  mc < 0 ? mc += 180 : mc;\n  // МС должен быть в пределах 10гр от Pv и положительным\n  if ((mc - pv).abs() > 10) {\n    mc += 180;\n  }\n\n  mc < 180 ? ic = mc + 180 : mc; // IC отстоит на 180гр\n  mc >= 180 ? ic = mc - 180 : mc;\n\n  asc < 0 ? asc += 180 : asc;\n  asc > 360 ? asc -= 360 : asc;\n\n  0 < asc && asc < mc ? asc += 180 : asc;\n\n  asc < 180 ? ds = asc + 180 : asc;\n  asc >= 180 ? ds = asc - 180 : asc;\n\n  // List<double> getDomes(double dom1, double domCompare) {\n  //   var dom2;\n  //   while (dom1 < asc) {\n  //   dom1 += 180;\n  //   dom1 > 360 ? dom1 = dom1 - 360 : dom1;\n  //   dom1 > 180 ? dom2 = dom1 - 180 : dom2 = dom1 + 180;\n  // }\n  //   return [dom1, dom2];\n  // } //должно работать чтобы упростить нижние while\n\n  while (ii < asc) {\n    ii += 180;\n    ii > 360 ? ii = ii - 360 : ii;\n    ii > 180 ? viii = ii - 180 : viii = ii + 180;\n  }\n  while (iii < asc) {\n    iii += 180;\n    iii > 360 ? iii = iii - 360 : iii;\n    iii > 180 ? ix = iii - 180 : ix = iii + 180;\n  }\n  while (xi < mc) {\n    xi += 180;\n    xi > 360 ? xi = xi - 360 : xi;\n    xi > 180 ? v = xi - 180 : v = xi + 180;\n  }\n  while (xii < mc) {\n    xii += 180;\n    xii > 360 ? xii = xii - 360 : xii;\n    xii > 180 ? vi = xii - 180 : vi = xii + 180;\n  }\n\n  return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "sourceFile": "bin/vsop/src/espenac.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1642126006327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642130792580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+// ------\n+// Ready\n+// ------\n+\n const _DAYS_PER_TROPICAL_YEAR = 365.24217;\n \n class Timex {\n   double DeltaT_EspenakMeeus(double ut) {\n"
+                },
+                {
+                    "date": 1642158788931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n // ------\n // Ready\n // ------\n \n-const _DAYS_PER_TROPICAL_YEAR = 365.24217;\n+const DAYS_PER_TROPICAL_YEAR = 365.24217;\n \n class Timex {\n   double DeltaT_EspenakMeeus(double ut) {\n-    double y = 2000 + ((ut - 14) / _DAYS_PER_TROPICAL_YEAR);\n+    double y = 2000 + ((ut - 14) / DAYS_PER_TROPICAL_YEAR);\n     double u, u1, u2, u3, u4, u5, u6, u7;\n     if (y < -500) {\n       u = (y - 1820) / 100;\n       return -20 + (32 * u * u);\n"
+                },
+                {
+                    "date": 1642379201495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n class Timex {\n   double DeltaT_EspenakMeeus(double ut) {\n     double y = 2000 + ((ut - 14) / DAYS_PER_TROPICAL_YEAR);\n-    double u, u1, u2, u3, u4, u5, u6, u7;\n+    double u, u2, u3, u4, u5, u6, u7;\n     if (y < -500) {\n       u = (y - 1820) / 100;\n       return -20 + (32 * u * u);\n     }\n"
+                },
+                {
+                    "date": 1642380492111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const DAYS_PER_TROPICAL_YEAR = 365.24217;\n \n class Timex {\n-  double DeltaT_EspenakMeeus(double ut) {\n+  double deltaTEspenakMeeus(double ut) {\n     double y = 2000 + ((ut - 14) / DAYS_PER_TROPICAL_YEAR);\n     double u, u2, u3, u4, u5, u6, u7;\n     if (y < -500) {\n       u = (y - 1820) / 100;\n"
+                },
+                {
+                    "date": 1642381461659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const DAYS_PER_TROPICAL_YEAR = 365.24217;\n \n class Timex {\n-  double deltaTEspenakMeeus(double ut) {\n+  double DeltaT_EspenakMeeus(double ut) {\n     double y = 2000 + ((ut - 14) / DAYS_PER_TROPICAL_YEAR);\n     double u, u2, u3, u4, u5, u6, u7;\n     if (y < -500) {\n       u = (y - 1820) / 100;\n"
+                },
+                {
+                    "date": 1642479119205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n // ------\n // Ready\n // ------\n \n-const DAYS_PER_TROPICAL_YEAR = 365.24217;\n+const daysPerTropicalYear = 365.24217;\n \n class Timex {\n-  double DeltaT_EspenakMeeus(double ut) {\n-    double y = 2000 + ((ut - 14) / DAYS_PER_TROPICAL_YEAR);\n+  double deltaTEspenakMeeus(double ut) {\n+    double y = 2000 + ((ut - 14) / daysPerTropicalYear);\n     double u, u2, u3, u4, u5, u6, u7;\n     if (y < -500) {\n       u = (y - 1820) / 100;\n       return -20 + (32 * u * u);\n"
+                }
+            ],
+            "date": 1642126006327,
+            "name": "Commit-0",
+            "content": "const _DAYS_PER_TROPICAL_YEAR = 365.24217;\n\nclass Timex {\n  double DeltaT_EspenakMeeus(double ut) {\n    double y = 2000 + ((ut - 14) / _DAYS_PER_TROPICAL_YEAR);\n    double u, u1, u2, u3, u4, u5, u6, u7;\n    if (y < -500) {\n      u = (y - 1820) / 100;\n      return -20 + (32 * u * u);\n    }\n\n    if (y < 500) {\n      u = y / 100;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      u5 = u2 * u3;\n      u6 = u3 * u3;\n      return 10583.6 -\n          1014.41 * u +\n          33.78311 * u2 -\n          5.952053 * u3 -\n          0.1798452 * u4 +\n          0.022174192 * u5 +\n          0.0090316521 * u6;\n    }\n\n    if (y < 1600) {\n      u = (y - 1000) / 100;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      u5 = u2 * u3;\n      u6 = u3 * u3;\n      return 1574.2 -\n          556.01 * u +\n          71.23472 * u2 +\n          0.319781 * u3 -\n          0.8503463 * u4 -\n          0.005050998 * u5 +\n          0.0083572073 * u6;\n    }\n\n    if (y < 1700) {\n      u = y - 1600;\n      u2 = u * u;\n      u3 = u * u2;\n      return 120 - 0.9808 * u - 0.01532 * u2 + u3 / 7129.0;\n    }\n\n    if (y < 1800) {\n      u = y - 1700;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      return 8.83 +\n          0.1603 * u -\n          0.0059285 * u2 +\n          0.00013336 * u3 -\n          u4 / 1174000;\n    }\n\n    if (y < 1860) {\n      u = y - 1800;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      u5 = u2 * u3;\n      u6 = u3 * u3;\n      u7 = u3 * u4;\n      return 13.72 -\n          0.332447 * u +\n          0.0068612 * u2 +\n          0.0041116 * u3 -\n          0.00037436 * u4 +\n          0.0000121272 * u5 -\n          0.0000001699 * u6 +\n          0.000000000875 * u7;\n    }\n\n    if (y < 1900) {\n      u = y - 1860;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      u5 = u2 * u3;\n      return 7.62 +\n          0.5737 * u -\n          0.251754 * u2 +\n          0.01680668 * u3 -\n          0.0004473624 * u4 +\n          u5 / 233174;\n    }\n\n    if (y < 1920) {\n      u = y - 1900;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      return -2.79 +\n          1.494119 * u -\n          0.0598939 * u2 +\n          0.0061966 * u3 -\n          0.000197 * u4;\n    }\n    if (y < 1941) {\n      u = y - 1920;\n      u2 = u * u;\n      u3 = u * u2;\n      return 21.20 + 0.84493 * u - 0.076100 * u2 + 0.0020936 * u3;\n    }\n\n    if (y < 1961) {\n      u = y - 1950;\n      u2 = u * u;\n      u3 = u * u2;\n      return 29.07 + 0.407 * u - u2 / 233 + u3 / 2547;\n    }\n\n    if (y < 1986) {\n      u = y - 1975;\n      u2 = u * u;\n      u3 = u * u2;\n      return 45.45 + 1.067 * u - u2 / 260 - u3 / 718;\n    }\n\n    if (y < 2005) {\n      u = y - 2000;\n      u2 = u * u;\n      u3 = u * u2;\n      u4 = u2 * u2;\n      u5 = u2 * u3;\n      return 63.86 +\n          0.3345 * u -\n          0.060374 * u2 +\n          0.0017275 * u3 +\n          0.000651814 * u4 +\n          0.00002373599 * u5;\n    }\n\n    if (y < 2050) {\n      u = y - 2000;\n      return 62.92 + 0.32217 * u + 0.005589 * u * u;\n    }\n\n    if (y < 2150) {\n      u = (y - 1820) / 100;\n      return -20 + 32 * u * u - 0.5628 * (2150 - y);\n    }\n\n    // all years after 2150\n    u = (y - 1820) / 100;\n    return -20 + (32 * u * u);\n  }\n}\n"
+        }
+    ]
+}

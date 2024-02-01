@@ -1,0 +1,30 @@
+{
+    "sourceFile": "simple/planets/calc_sun.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1641962416854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641963229866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import 'export_funcs.dart';\n \n-List<double> sun(\n+List<double> dataSun(\n     double N, double i, double a, double w, double e, double M, double d) {\n // Шаг 1 - вычислить E экцентрическую аномалию\n // sin/cos выдают в радианах - поэтому сразу конвертировать *pi/180\n   var _E = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n"
+                },
+                {
+                    "date": 1641963348625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n List<double> dataSun(\n     double N, double i, double a, double w, double e, double M, double d) {\n // Шаг 1 - вычислить E экцентрическую аномалию\n // sin/cos выдают в радианах - поэтому сразу конвертировать *pi/180\n-  var _E = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n-  var E = radians(_E);\n+  var _e = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n+  var E = radians(_e);\n \n // Шаг 2 - вычислить прямоугольные координаты солнца в плоскости эклиптики\n // где x - угол направленный к перигелию\n   var x = cos(E) - e;\n@@ -20,13 +20,13 @@\n // Шаг 4 (главный) - Теперь подсчитать ГЕОЦЕНТРИКУ !!!\n // lat = 0 # т.к это само солнце в своей плоскости\n // R = 0   # т.к это само солнце и расст до солнца = 0\n   var _lon = v + w;\n-  var _lon_ecl = deg_360(_lon);\n-  var lon_ecl = deg_360(_lon + 180);\n-  var lon_topos = deg_360(_lon); // по факту = топоцентрике\n+  var _lonEcl = deg_360(_lon);\n+  var lonEcl = deg_360(_lon + 180);\n+  var lonTopos = deg_360(_lon); // по факту = топоцентрике\n \n-  var x_eclip = r * cos(radians(_lon_ecl));\n-  var y_eclip = r * sin(radians(_lon_ecl));\n+  var xEclip = r * cos(radians(_lonEcl));\n+  var yEclip = r * sin(radians(_lonEcl));\n \n-  return [lon_topos, lon_ecl, x_eclip, y_eclip];\n+  return [lonTopos, lonEcl, xEclip, yEclip];\n }\n"
+                },
+                {
+                    "date": 1641964223462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,4 +29,10 @@\n   var yEclip = r * sin(radians(_lonEcl));\n \n   return [lonTopos, lonEcl, xEclip, yEclip];\n }\n+\n+\n+/* Примечание \n+все что закомментировал - только потому что мне |пока не требуется| выводить данные\n+LAT RA R DECL\n+*/\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1641962416854,
+            "name": "Commit-0",
+            "content": "import 'export_funcs.dart';\n\nList<double> sun(\n    double N, double i, double a, double w, double e, double M, double d) {\n// Шаг 1 - вычислить E экцентрическую аномалию\n// sin/cos выдают в радианах - поэтому сразу конвертировать *pi/180\n  var _E = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n  var E = radians(_E);\n\n// Шаг 2 - вычислить прямоугольные координаты солнца в плоскости эклиптики\n// где x - угол направленный к перигелию\n  var x = cos(E) - e;\n  var y = sin(E) * sqrt(1 - e * e);\n\n// Шаг 3 - конвертировать в расстояние и истинную аномалию\n  var r = sqrt(x * x + y * y); //расстояние\n  var _v = atan2(y, x);\n  var v = deg_360(degrees(_v)); // -> истинная аномалия в градусах\n\n// Шаг 4 (главный) - Теперь подсчитать ГЕОЦЕНТРИКУ !!!\n// lat = 0 # т.к это само солнце в своей плоскости\n// R = 0   # т.к это само солнце и расст до солнца = 0\n  var _lon = v + w;\n  var _lon_ecl = deg_360(_lon);\n  var lon_ecl = deg_360(_lon + 180);\n  var lon_topos = deg_360(_lon); // по факту = топоцентрике\n\n  var x_eclip = r * cos(radians(_lon_ecl));\n  var y_eclip = r * sin(radians(_lon_ecl));\n\n  return [lon_topos, lon_ecl, x_eclip, y_eclip];\n}\n"
+        }
+    ]
+}

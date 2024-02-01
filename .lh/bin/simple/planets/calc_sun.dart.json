@@ -1,0 +1,18 @@
+{
+    "sourceFile": "bin/simple/planets/calc_sun.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1641965739873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1641965739873,
+            "name": "Commit-0",
+            "content": "import 'export_funcs.dart';\n\nList<double> dataSun(\n    double N, double i, double a, double w, double e, double M, double d) {\n// Шаг 1 - вычислить E экцентрическую аномалию\n// sin/cos выдают в радианах - поэтому сразу конвертировать *pi/180\n  var _e = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n  var E = radians(_e);\n\n// Шаг 2 - вычислить прямоугольные координаты солнца в плоскости эклиптики\n// где x - угол направленный к перигелию\n  var x = cos(E) - e;\n  var y = sin(E) * sqrt(1 - e * e);\n\n// Шаг 3 - конвертировать в расстояние и истинную аномалию\n  var r = sqrt(x * x + y * y); //расстояние\n  var _v = atan2(y, x);\n  var v = deg_360(degrees(_v)); // -> истинная аномалия в градусах\n\n// Шаг 4 (главный) - Теперь подсчитать ГЕОЦЕНТРИКУ !!!\n// lat = 0 # т.к это само солнце в своей плоскости\n// R = 0   # т.к это само солнце и расст до солнца = 0\n  var _lon = v + w;\n  var _lonEcl = deg_360(_lon);\n  var lonEcl = deg_360(_lon + 180);\n  var lonTopos = deg_360(_lon); // по факту = топоцентрике\n\n  var xEclip = r * cos(radians(_lonEcl));\n  var yEclip = r * sin(radians(_lonEcl));\n\n  return [lonTopos, lonEcl, xEclip, yEclip];\n}\n\n\n/* Примечание \nвсе что закомментировал - только потому что мне |пока не требуется| выводить данные\nLAT RA R DECL\n*/"
+        }
+    ]
+}

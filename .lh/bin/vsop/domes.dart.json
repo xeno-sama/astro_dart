@@ -1,0 +1,158 @@
+{
+    "sourceFile": "bin/vsop/domes.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 35,
+            "patches": [
+                {
+                    "date": 1642125159609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642136926736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n+// ------\n+// Ready\n+// ------\n // ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables\n \n import 'dart:math';\n import 'src/func.dart';\n"
+                },
+                {
+                    "date": 1642608733098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n     int Y, int M, int D, int h, int m, double LAT, double LON, double d) {\n   var ecl = 23.4393 - 3.563E-7 * d;\n \n   var w_sun = 282.9404 + 4.70935E-5 * d;\n-  var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n-  var L_sun = deg_360(w_sun + M_sun); // Звездное время\n+  var M_sun = deg360(356.0470 + 0.9856002585 * d);\n+  var L_sun = deg360(w_sun + M_sun); // Звездное время\n \n   var RA = localSidTime(h, m, L_sun, LON); // прямое восхождение\n \n   var pv = radians(RA);\n@@ -24,9 +24,9 @@\n   var mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n   var asc =\n-      deg_360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n+      deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n   // вспомогательный угол для куспидов\n   var c = acos(-tan(e) * sin(pv) * tan(lat));\n \n"
+                },
+                {
+                    "date": 1642862874750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,37 +7,37 @@\n import 'src/func.dart';\n \n List<double> domes(\n     int Y, int M, int D, int h, int m, double LAT, double LON, double d) {\n-  var ecl = 23.4393 - 3.563E-7 * d;\n+  double ecl = 23.4393 - 3.563E-7 * d;\n \n-  var w_sun = 282.9404 + 4.70935E-5 * d;\n-  var M_sun = deg360(356.0470 + 0.9856002585 * d);\n-  var L_sun = deg360(w_sun + M_sun); // Звездное время\n+  double w_sun = 282.9404 + 4.70935E-5 * d;\n+  double M_sun = deg360(356.0470 + 0.9856002585 * d);\n+  double L_sun = deg360(w_sun + M_sun); // Звездное время\n \n-  var RA = localSidTime(h, m, L_sun, LON); // прямое восхождение\n+  double RA = localSidTime(h, m, L_sun, LON); // прямое восхождение\n \n-  var pv = radians(RA);\n-  var lat = radians(LAT);\n-  var e = radians(ecl); // склонение эклиптики в радианах\n+  double pv = radians(RA);\n+  double lat = radians(LAT);\n+  double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n-  var mc = degrees(atan(tan(pv) / cos(e)));\n+  double mc = degrees(atan(tan(pv) / cos(e)));\n   var ic, v, vi, ds, viii, ix;\n   // формула для AS\n-  var asc =\n+  double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n   // вспомогательный угол для куспидов\n-  var c = acos(-tan(e) * sin(pv) * tan(lat));\n+  double c = acos(-tan(e) * sin(pv) * tan(lat));\n \n-  var ii = degrees(\n+  double ii = degrees(\n       atan(cos(pv + c / 3) / -(tan(lat) * sin(e) + sin(pv + c / 3) * cos(e))));\n-  var iii = degrees(atan(cos(pv + 2 * c / 3) /\n+  double iii = degrees(atan(cos(pv + 2 * c / 3) /\n       -(tan(lat) * sin(e) + sin(pv + 2 * c / 3) * cos(e))));\n-  var xi = degrees(atan(cos(pv - 2 * c / 3) /\n+  double xi = degrees(atan(cos(pv - 2 * c / 3) /\n       -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n-  var xii = degrees(\n+  double xii = degrees(\n       atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n \n   mc < 0 ? mc += 180 : mc;\n   // МС должен быть в пределах 10гр от Pv и положительным\n"
+                },
+                {
+                    "date": 1642862897635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  var ic, v, vi, ds, viii, ix;\n+  double ic, v, vi, ds, viii, ix;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642862929560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  double ic, v, vi, ds, viii, ix;\n+  late double ic, v, vi, ds, viii, ix;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642863012926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,10 @@\n import 'src/func.dart';\n \n List<double> domes(\n     int Y, int M, int D, int h, int m, double LAT, double LON, double d) {\n+  int h = dat.hour;\n+\n   double ecl = 23.4393 - 3.563E-7 * d;\n \n   double w_sun = 282.9404 + 4.70935E-5 * d;\n   double M_sun = deg360(356.0470 + 0.9856002585 * d);\n"
+                },
+                {
+                    "date": 1642863065821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,11 @@\n \n import 'dart:math';\n import 'src/func.dart';\n \n-List<double> domes(\n-    int Y, int M, int D, int h, int m, double LAT, double LON, double d) {\n+List<double> domes(dat, double LAT, double LON, double d) {\n   int h = dat.hour;\n+  int m = dat.minute;\n \n   double ecl = 23.4393 - 3.563E-7 * d;\n \n   double w_sun = 282.9404 + 4.70935E-5 * d;\n"
+                },
+                {
+                    "date": 1642863114050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n import 'dart:math';\n import 'src/func.dart';\n \n-List<double> domes(dat, double LAT, double LON, double d) {\n+List<double> domes(dat, LAT, LON, d) {\n   int h = dat.hour;\n   int m = dat.minute;\n \n   double ecl = 23.4393 - 3.563E-7 * d;\n"
+                },
+                {
+                    "date": 1642866072569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,11 @@\n \n import 'dart:math';\n import 'src/func.dart';\n \n-List<double> domes(dat, LAT, LON, d) {\n-  int h = dat.hour;\n-  int m = dat.minute;\n+List<double> domes(DateTime dat, double LAT, double LON, double d) {\n+  var h = dat.hour;\n+  var m = dat.minute;\n \n   double ecl = 23.4393 - 3.563E-7 * d;\n \n   double w_sun = 282.9404 + 4.70935E-5 * d;\n"
+                },
+                {
+                    "date": 1642866096862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  late double ic, v, vi, ds, viii, ix;\n+  double? ic, v, vi, ds, viii, ix;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642866267199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  double? ic, v, vi, ds, viii, ix;\n+  double ic, v, vi, ds, viii, ix;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642866328244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,11 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  double ic, v, vi, ds, viii, ix;\n+  // late double ic, v, vi, ds, viii, ix;\n+  late double v, vi, ds, viii, ix;\n+  double ic = 0;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642866403783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,12 @@\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   // late double ic, v, vi, ds, viii, ix;\n-  late double v, vi, ds, viii, ix;\n+  late double ds, viii, ix;\n   double ic = 0;\n+  double v = 0;\n+  double vi = 0;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642866446526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,12 +24,15 @@\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   // late double ic, v, vi, ds, viii, ix;\n-  late double ds, viii, ix;\n+  // late double ds, viii, ix;\n   double ic = 0;\n   double v = 0;\n   double vi = 0;\n+  double ds = 0;\n+  double viii = 0;\n+  double ix = 0;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642866479771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n   // МС должен быть в пределах 10гр от Pv и положительным\n   if ((mc - pv).abs() > 10) {\n     mc += 180;\n   }\n-\n+  print('object');\n   mc < 180 ? ic = mc + 180 : mc; // IC отстоит на 180гр\n   mc >= 180 ? ic = mc - 180 : mc;\n \n   asc < 0 ? asc += 180 : asc;\n"
+                },
+                {
+                    "date": 1642866505786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n   // МС должен быть в пределах 10гр от Pv и положительным\n   if ((mc - pv).abs() > 10) {\n     mc += 180;\n   }\n-  print('object');\n+\n   mc < 180 ? ic = mc + 180 : mc; // IC отстоит на 180гр\n   mc >= 180 ? ic = mc - 180 : mc;\n \n   asc < 0 ? asc += 180 : asc;\n@@ -63,9 +63,9 @@\n   0 < asc && asc < mc ? asc += 180 : asc;\n \n   asc < 180 ? ds = asc + 180 : asc;\n   asc >= 180 ? ds = asc - 180 : asc;\n-\n+  print('object');\n   while (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n"
+                },
+                {
+                    "date": 1642866526205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n   0 < asc && asc < mc ? asc += 180 : asc;\n \n   asc < 180 ? ds = asc + 180 : asc;\n   asc >= 180 ? ds = asc - 180 : asc;\n-  print('object');\n+\n   while (ii < asc) {\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n@@ -81,9 +81,9 @@\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n   }\n-\n+  print('object');\n   while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n"
+                },
+                {
+                    "date": 1642866553793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-\n+  print('object');\n   while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n@@ -81,9 +81,9 @@\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n   }\n-  print('object');\n+\n   while (xii < mc) {\n     xii += 180;\n     xii > 360 ? xii = xii - 360 : xii;\n     xii > 180 ? vi = xii - 180 : vi = xii + 180;\n"
+                },
+                {
+                    "date": 1642866571580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,15 +69,15 @@\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-  print('object');\n+\n   while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   }\n-\n+  print('object');\n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n"
+                },
+                {
+                    "date": 1642866613814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,13 +70,13 @@\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n \n-  while (iii < asc) {\n-    iii += 180;\n-    iii > 360 ? iii = iii - 360 : iii;\n-    iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-  }\n+  // while (iii < asc) {\n+  //   iii += 180;\n+  //   iii > 360 ? iii = iii - 360 : iii;\n+  //   iii > 180 ? ix = iii - 180 : ix = iii + 180;\n+  // }\n   print('object');\n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n"
+                },
+                {
+                    "date": 1642866680031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,13 +70,13 @@\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n \n-  // while (iii < asc) {\n-  //   iii += 180;\n-  //   iii > 360 ? iii = iii - 360 : iii;\n-  //   iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-  // }\n+  while (iii < asc) {\n+    iii += 180;\n+    iii > 360 ? iii = iii - 360 : iii;\n+    iii > 180 ? ix = iii - 180 : ix = iii + 180;\n+  }\n   print('object');\n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n"
+                },
+                {
+                    "date": 1642866787682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,15 +69,15 @@\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-\n+  print('$iii $asc');\n   while (iii < asc) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   }\n-  print('object');\n+\n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n     xi > 180 ? v = xi - 180 : v = xi + 180;\n"
+                },
+                {
+                    "date": 1642866922331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,10 +69,10 @@\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-  print('$iii $asc');\n-  while (iii < asc) {\n+\n+  while (iii < ii) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n   }\n"
+                },
+                {
+                    "date": 1642866991045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n     ii += 180;\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n   }\n-\n+  print('$iii $ii');\n   while (iii < ii) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n"
+                },
+                {
+                    "date": 1642867174400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,16 +23,16 @@\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n-  // late double ic, v, vi, ds, viii, ix;\n+  late double ic, v, vi, ds, viii, ix;\n   // late double ds, viii, ix;\n-  double ic = 0;\n-  double v = 0;\n-  double vi = 0;\n-  double ds = 0;\n-  double viii = 0;\n-  double ix = 0;\n+  // double ic = 0;\n+  // double v = 0;\n+  // double vi = 0;\n+  // double ds = 0;\n+  // double viii = 0;\n+  // double ix = 0;\n   // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n"
+                },
+                {
+                    "date": 1642867284093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,17 +66,18 @@\n   asc >= 180 ? ds = asc - 180 : asc;\n \n   while (ii < asc) {\n     ii += 180;\n+  }\n     ii > 360 ? ii = ii - 360 : ii;\n     ii > 180 ? viii = ii - 180 : viii = ii + 180;\n-  }\n+  \n   print('$iii $ii');\n   while (iii < ii) {\n     iii += 180;\n     iii > 360 ? iii = iii - 360 : iii;\n     iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-  }\n+  \n \n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n"
+                },
+                {
+                    "date": 1642867322696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,17 +67,16 @@\n \n   while (ii < asc) {\n     ii += 180;\n   }\n-    ii > 360 ? ii = ii - 360 : ii;\n-    ii > 180 ? viii = ii - 180 : viii = ii + 180;\n-  \n-  print('$iii $ii');\n+  ii > 360 ? ii = ii - 360 : ii;\n+  ii > 180 ? viii = ii - 180 : viii = ii + 180;\n+\n   while (iii < ii) {\n     iii += 180;\n-    iii > 360 ? iii = iii - 360 : iii;\n-    iii > 180 ? ix = iii - 180 : ix = iii + 180;\n-  \n+  }\n+  iii > 360 ? iii = iii - 360 : iii;\n+  iii > 180 ? ix = iii - 180 : ix = iii + 180;\n \n   while (xi < mc) {\n     xi += 180;\n     xi > 360 ? xi = xi - 360 : xi;\n"
+                },
+                {
+                    "date": 1642867406876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,16 +78,16 @@\n   iii > 180 ? ix = iii - 180 : ix = iii + 180;\n \n   while (xi < mc) {\n     xi += 180;\n-    xi > 360 ? xi = xi - 360 : xi;\n-    xi > 180 ? v = xi - 180 : v = xi + 180;\n   }\n+  xi > 360 ? xi = xi - 360 : xi;\n+  xi > 180 ? v = xi - 180 : v = xi + 180;\n \n   while (xii < mc) {\n     xii += 180;\n-    xii > 360 ? xii = xii - 360 : xii;\n-    xii > 180 ? vi = xii - 180 : vi = xii + 180;\n   }\n+  xii > 360 ? xii = xii - 360 : xii;\n+  xii > 180 ? vi = xii - 180 : vi = xii + 180;\n \n   return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n }\n"
+                },
+                {
+                    "date": 1642867504148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n   double xi = degrees(atan(cos(pv - 2 * c / 3) /\n       -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n   double xii = degrees(\n       atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n-\n+  print('$pv $c $lat');\n   mc < 0 ? mc += 180 : mc;\n   // МС должен быть в пределах 10гр от Pv и положительным\n   if ((mc - pv).abs() > 10) {\n     mc += 180;\n"
+                },
+                {
+                    "date": 1642867707034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,20 +20,12 @@\n \n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n-\n+  print('$w_sun, $M_sun, $L_sun');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n-  // late double ds, viii, ix;\n-  // double ic = 0;\n-  // double v = 0;\n-  // double vi = 0;\n-  // double ds = 0;\n-  // double viii = 0;\n-  // double ix = 0;\n-  // формула для AS\n   double asc =\n       deg360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n \n   // вспомогательный угол для куспидов\n"
+                },
+                {
+                    "date": 1642867834545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n   print('$w_sun, $M_sun, $L_sun');\n+  print('$e, $pv, $lat, $RA');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n   double asc =\n@@ -38,9 +39,9 @@\n   double xi = degrees(atan(cos(pv - 2 * c / 3) /\n       -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n   double xii = degrees(\n       atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n-  print('$pv $c $lat');\n+  print('$c');\n   mc < 0 ? mc += 180 : mc;\n   // МС должен быть в пределах 10гр от Pv и положительным\n   if ((mc - pv).abs() > 10) {\n     mc += 180;\n"
+                },
+                {
+                    "date": 1642867907233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n-  print('$w_sun, $M_sun, $L_sun');\n+\n   print('$e, $pv, $lat, $RA');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n"
+                },
+                {
+                    "date": 1642868026629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n-  print('$e, $pv, $lat, $RA');\n+  print('$RA $pv, $lat, ');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n   double asc =\n"
+                },
+                {
+                    "date": 1642868050405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n-  print('$RA $pv, $lat, ');\n+  print('$lat $RA $pv');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n   double asc =\n"
+                },
+                {
+                    "date": 1642868132683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n   double pv = radians(RA);\n   double lat = radians(LAT);\n   double e = radians(ecl); // склонение эклиптики в радианах\n \n-  print('$lat $RA $pv');\n   // формула для МС\n   double mc = degrees(atan(tan(pv) / cos(e)));\n   late double ic, v, vi, ds, viii, ix;\n   double asc =\n@@ -39,9 +38,9 @@\n   double xi = degrees(atan(cos(pv - 2 * c / 3) /\n       -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n   double xii = degrees(\n       atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n-  print('$c');\n+\n   mc < 0 ? mc += 180 : mc;\n   // МС должен быть в пределах 10гр от Pv и положительным\n   if ((mc - pv).abs() > 10) {\n     mc += 180;\n"
+                }
+            ],
+            "date": 1642125159609,
+            "name": "Commit-0",
+            "content": "// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables\n\nimport 'dart:math';\nimport 'src/func.dart';\n\nList<double> domes(\n    int Y, int M, int D, int h, int m, double LAT, double LON, double d) {\n  var ecl = 23.4393 - 3.563E-7 * d;\n\n  var w_sun = 282.9404 + 4.70935E-5 * d;\n  var M_sun = deg_360(356.0470 + 0.9856002585 * d);\n  var L_sun = deg_360(w_sun + M_sun); // Звездное время\n\n  var RA = localSidTime(h, m, L_sun, LON); // прямое восхождение\n\n  var pv = radians(RA);\n  var lat = radians(LAT);\n  var e = radians(ecl); // склонение эклиптики в радианах\n\n  // формула для МС\n  var mc = degrees(atan(tan(pv) / cos(e)));\n  var ic, v, vi, ds, viii, ix;\n  // формула для AS\n  var asc =\n      deg_360(degrees(atan(cos(pv) / -(tan(lat) * sin(e) + sin(pv) * cos(e)))));\n\n  // вспомогательный угол для куспидов\n  var c = acos(-tan(e) * sin(pv) * tan(lat));\n\n  var ii = degrees(\n      atan(cos(pv + c / 3) / -(tan(lat) * sin(e) + sin(pv + c / 3) * cos(e))));\n  var iii = degrees(atan(cos(pv + 2 * c / 3) /\n      -(tan(lat) * sin(e) + sin(pv + 2 * c / 3) * cos(e))));\n  var xi = degrees(atan(cos(pv - 2 * c / 3) /\n      -(tan(lat) * sin(e) + sin(pv - 2 * c / 3) * cos(e))));\n  var xii = degrees(\n      atan(cos(pv - c / 3) / -(tan(lat) * sin(e) + sin(pv - c / 3) * cos(e))));\n\n  mc < 0 ? mc += 180 : mc;\n  // МС должен быть в пределах 10гр от Pv и положительным\n  if ((mc - pv).abs() > 10) {\n    mc += 180;\n  }\n\n  mc < 180 ? ic = mc + 180 : mc; // IC отстоит на 180гр\n  mc >= 180 ? ic = mc - 180 : mc;\n\n  asc < 0 ? asc += 180 : asc;\n  asc > 360 ? asc -= 360 : asc;\n\n  0 < asc && asc < mc ? asc += 180 : asc;\n\n  asc < 180 ? ds = asc + 180 : asc;\n  asc >= 180 ? ds = asc - 180 : asc;\n\n  while (ii < asc) {\n    ii += 180;\n    ii > 360 ? ii = ii - 360 : ii;\n    ii > 180 ? viii = ii - 180 : viii = ii + 180;\n  }\n\n  while (iii < asc) {\n    iii += 180;\n    iii > 360 ? iii = iii - 360 : iii;\n    iii > 180 ? ix = iii - 180 : ix = iii + 180;\n  }\n\n  while (xi < mc) {\n    xi += 180;\n    xi > 360 ? xi = xi - 360 : xi;\n    xi > 180 ? v = xi - 180 : v = xi + 180;\n  }\n\n  while (xii < mc) {\n    xii += 180;\n    xii > 360 ? xii = xii - 360 : xii;\n    xii > 180 ? vi = xii - 180 : vi = xii + 180;\n  }\n\n  return [asc, ii, iii, ic, v, vi, ds, viii, ix, mc, xi, xii];\n}\n"
+        }
+    ]
+}

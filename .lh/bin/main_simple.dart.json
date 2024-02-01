@@ -1,0 +1,210 @@
+{
+    "sourceFile": "bin/main_simple.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 48,
+            "patches": [
+                {
+                    "date": 1641631856548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641631896581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,16 +96,11 @@\n     URANUS,\n     NEPTUNE,\n     PLUTO\n   ];\n-  // void _print(double elem) {\n-  //   print(elem);\n-  // }\n \n-  _list.forEach((item) {\n+  for (var item in _list) {\n     print(item[0]);\n-  });\n-  // for (var obj in _list) {\n-  //   print(obj[0]);\n-  // }\n+  }\n+\n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641636218054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n import '../simple/defs/func.dart';\n+import '../simple/defs/domes.dart';\n import '../simple/const.dart';\n import '../simple/calc_sun.dart';\n import '../simple/calc_moon.dart';\n import '../simple/calc_mercury.dart';\n"
+                },
+                {
+                    "date": 1641636326340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,8 +98,10 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n+  var _domes = domes()\n+\n   for (var item in _list) {\n     print(item[0]);\n   }\n \n"
+                },
+                {
+                    "date": 1641636386598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,12 +98,16 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes()\n+  var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n \n+  for (var item in _domes) {\n+    print(item);\n+  }\n+\n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641636578102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,10 +104,10 @@\n   for (var item in _list) {\n     print(item[0]);\n   }\n \n-  for (var item in _domes) {\n-    print(item);\n-  }\n+  // for (var item in _domes) {\n+  //   print(item);\n+  // }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641636591181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n+  // var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1641636797971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n import '../simple/calc_pluto.dart';\n \n void main() {\n   var LON = 0.0;\n+  var LAT = 0.0;\n   var d = num_date(1977, 5, 27, 16, 52);\n   var data = init_vals(d);\n   var LST = lst(16, 52, data['L_sun'], 0);\n \n@@ -98,9 +99,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  // var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n+  var _domes = domes(1977, 5, 27, 16, 52, LON, LAT);\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1641636918451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,10 +105,10 @@\n   for (var item in _list) {\n     print(item[0]);\n   }\n \n-  // for (var item in _domes) {\n-  //   print(item);\n-  // }\n+  for (var item in _domes) {\n+    print(item);\n+  }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641636960139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n-\n+  print('');\n   for (var item in _domes) {\n     print(item);\n   }\n \n"
+                },
+                {
+                    "date": 1641637485629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,8 @@\n import '../simple/calc_pluto.dart';\n \n void main() {\n   var LON = 0.0;\n-  var LAT = 0.0;\n   var d = num_date(1977, 5, 27, 16, 52);\n   var data = init_vals(d);\n   var LST = lst(16, 52, data['L_sun'], 0);\n \n@@ -99,16 +98,16 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, LON, LAT);\n+  var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n-  print('');\n-  for (var item in _domes) {\n-    print(item);\n-  }\n \n+  // for (var item in _domes) {\n+  //   print(item);\n+  // }\n+\n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641637601851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,11 +103,11 @@\n \n   for (var item in _list) {\n     print(item[0]);\n   }\n+  print('__');\n+  for (var item in _domes) {\n+    print(item);\n+  }\n \n-  // for (var item in _domes) {\n-  //   print(item);\n-  // }\n-\n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641637826712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n       d);\n \n   var PLUTO = pluto(xsun, ysun, d);\n \n-  var _list = [\n+  var _planets = [\n     SUN,\n     MOON,\n     MERCURY,\n     VENUS,\n@@ -98,14 +98,14 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 0, 0);\n+  var _domes = domes(1977, 5, 27, 16, 52, d, 42.6, 74.9);\n \n-  for (var item in _list) {\n-    print(item[0]);\n-  }\n-  print('__');\n+  // for (var item in _planets) {\n+  //   print(item[0]);\n+  // }\n+  // print('__');\n   for (var item in _domes) {\n     print(item);\n   }\n \n"
+                },
+                {
+                    "date": 1641637896749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, d, 42.6, 74.9);\n+  var _domes = domes(1977, 5, 27, 16, 52, d, 0, 0);\n \n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n"
+                },
+                {
+                    "date": 1641638017998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, d, 0, 0);\n+  var _domes = domes(1977, 5, 27, 16, 52, d, 75, 42);\n \n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n"
+                },
+                {
+                    "date": 1641638048961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, d, 75, 42);\n+  var _domes = domes(1977, 5, 27, 16, 52, d, 75.0, 42.6);\n \n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n"
+                },
+                {
+                    "date": 1641638510834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     NEPTUNE,\n     PLUTO\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, d, 75.0, 42.6);\n+  var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n \n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n"
+                },
+                {
+                    "date": 1641638905154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,9 +105,9 @@\n   //   print(item[0]);\n   // }\n   // print('__');\n   for (var item in _domes) {\n-    print(item);\n+    print(item.round());\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641638948178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,9 +105,9 @@\n   //   print(item[0]);\n   // }\n   // print('__');\n   for (var item in _domes) {\n-    print(item.round());\n+    print(item.round().abs());\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641639117894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,9 +105,9 @@\n   //   print(item[0]);\n   // }\n   // print('__');\n   for (var item in _domes) {\n-    print(item.round().abs());\n+    print(item.toStringAsFixed(2));\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641696681155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,10 +104,12 @@\n   // for (var item in _planets) {\n   //   print(item[0]);\n   // }\n   // print('__');\n+  int index = 0;\n   for (var item in _domes) {\n-    print(item.toStringAsFixed(2));\n+    index++;\n+    print('${item.toStringAsFixed(2)}');\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641696730388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,9 +107,9 @@\n   // print('__');\n   int index = 0;\n   for (var item in _domes) {\n     index++;\n-    print('${item.toStringAsFixed(2)}');\n+    print('${index} - ${item.toStringAsFixed(2)}');\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641696747182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,9 +107,9 @@\n   // print('__');\n   int index = 0;\n   for (var item in _domes) {\n     index++;\n-    print('${index} - ${item.toStringAsFixed(2)}');\n+    print('$index - ${item.toStringAsFixed(2)}');\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641696766307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,9 +107,9 @@\n   // print('__');\n   int index = 0;\n   for (var item in _domes) {\n     index++;\n-    print('$index - ${item.toStringAsFixed(2)}');\n+    print('$indexдом - ${item.toStringAsFixed(2)}');\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641696785468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,9 +107,9 @@\n   // print('__');\n   int index = 0;\n   for (var item in _domes) {\n     index++;\n-    print('$indexдом - ${item.toStringAsFixed(2)}');\n+    print('$index-дом __ ${item.toStringAsFixed(2)}');\n   }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1641960685004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n-import '../simple/defs/func.dart';\n-import '../simple/defs/domes.dart';\n-import '../simple/const.dart';\n+import '../simple/plugins.dart';\n+// import '../simple/defs/domes.dart';\n+// import '../simple/const.dart';\n import '../simple/calc_sun.dart';\n import '../simple/calc_moon.dart';\n import '../simple/calc_mercury.dart';\n import '../simple/calc_venus.dart';\n"
+                },
+                {
+                    "date": 1641960702488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n import '../simple/plugins.dart';\n // import '../simple/defs/domes.dart';\n-// import '../simple/const.dart';\n+import '../simple/const.dart';\n import '../simple/calc_sun.dart';\n import '../simple/calc_moon.dart';\n import '../simple/calc_mercury.dart';\n import '../simple/calc_venus.dart';\n"
+                },
+                {
+                    "date": 1641960900125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,8 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n import '../simple/plugins.dart';\n-// import '../simple/defs/domes.dart';\n-import '../simple/const.dart';\n import '../simple/calc_sun.dart';\n import '../simple/calc_moon.dart';\n import '../simple/calc_mercury.dart';\n import '../simple/calc_venus.dart';\n"
+                },
+                {
+                    "date": 1641961058197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,8 @@\n // import '../models/simple.dart';\n // ignore_for_file: unused_local_variable, non_constant_identifier_names\n \n import '../simple/plugins.dart';\n-import '../simple/calc_sun.dart';\n-import '../simple/calc_moon.dart';\n-import '../simple/calc_mercury.dart';\n-import '../simple/calc_venus.dart';\n-import '../simple/calc_mars.dart';\n-import '../simple/calc_jupiter.dart';\n-import '../simple/calc_saturn.dart';\n-import '../simple/calc_uranus.dart';\n-import '../simple/calc_neptune.dart';\n-import '../simple/calc_pluto.dart';\n \n void main() {\n   var LON = 0.0;\n   var d = num_date(1977, 5, 27, 16, 52);\n"
+                },
+                {
+                    "date": 1641961070316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,12 +88,12 @@\n   ];\n \n   var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n \n-  // for (var item in _planets) {\n-  //   print(item[0]);\n-  // }\n-  // print('__');\n+  for (var item in _planets) {\n+    print(item[0]);\n+  }\n+  print('__');\n   int index = 0;\n   for (var item in _domes) {\n     index++;\n     print('$index-дом __ ${item.toStringAsFixed(2)}');\n"
+                },
+                {
+                    "date": 1641962535836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n-// import '../models/simple.dart';\n-// ignore_for_file: unused_local_variable, non_constant_identifier_names\n+import '../simple/export_planets.dart';\n \n-import '../simple/plugins.dart';\n-\n void main() {\n   var LON = 0.0;\n   var d = num_date(1977, 5, 27, 16, 52);\n   var data = init_vals(d);\n"
+                },
+                {
+                    "date": 1641963261526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,17 @@\n import '../simple/export_planets.dart';\n \n void main() {\n-  var LON = 0.0;\n-  var d = num_date(1977, 5, 27, 16, 52);\n-  var data = init_vals(d);\n-  var LST = lst(16, 52, data['L_sun'], 0);\n+  var lon = 0.0;\n+  var d = numDate(1977, 5, 27, 16, 52);\n+  var data = initVals(d);\n+  var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n-  var SUN = sun(data['N_sun']!, data['i_sun']!, data['a_sun']!, data['w_sun']!,\n-      data['e_sun']!, data['M_sun']!, d);\n+  var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n+      data['w_sun']!, data['e_sun']!, data['M_sun']!, d);\n \n-  var xsun = SUN[2];\n-  var ysun = SUN[3];\n+  var xsun = sun[2];\n+  var ysun = sun[3];\n \n   var MOON = moon(\n       data['N_moon']!,\n       data['i_moon']!,\n@@ -20,9 +20,9 @@\n       data['e_moon']!,\n       data['M_moon']!,\n       data['M_sun']!,\n       data['L_sun']!,\n-      LST,\n+      lst,\n       d);\n \n   var MERCURY = mercury(\n       data['N_mercury']!,\n@@ -71,9 +71,9 @@\n \n   var PLUTO = pluto(xsun, ysun, d);\n \n   var _planets = [\n-    SUN,\n+    sun,\n     MOON,\n     MERCURY,\n     VENUS,\n     MARS,\n"
+                },
+                {
+                    "date": 1641963532217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import '../simple/export_planets.dart';\n \n void main() {\n-  var lon = 0.0;\n+  // var lon = 0.0;\n   var d = numDate(1977, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n@@ -11,9 +11,9 @@\n \n   var xsun = sun[2];\n   var ysun = sun[3];\n \n-  var MOON = moon(\n+  var MOON = dataMoon(\n       data['N_moon']!,\n       data['i_moon']!,\n       data['a_moon']!,\n       data['w_moon']!,\n@@ -23,9 +23,9 @@\n       data['L_sun']!,\n       lst,\n       d);\n \n-  var MERCURY = mercury(\n+  var MERCURY = dataMercury(\n       data['N_mercury']!,\n       data['i_mercury']!,\n       data['a_mercury']!,\n       data['w_mercury']!,\n@@ -34,15 +34,15 @@\n       xsun,\n       ysun,\n       d);\n \n-  var VENUS = venus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n+  var VENUS = dataVenus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n       data['w_venus']!, data['e_venus']!, data['M_venus']!, xsun, ysun, d);\n \n-  var MARS = mars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n+  var MARS = dataMars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n       data['w_mars']!, data['e_mars']!, data['M_mars']!, xsun, ysun, d);\n \n-  var JUPITER = jupiter(\n+  var JUPITER = dataJupiter(\n       data['N_jupiter']!,\n       data['i_jupiter']!,\n       data['a_jupiter']!,\n       data['w_jupiter']!,\n@@ -51,15 +51,31 @@\n       xsun,\n       ysun,\n       d);\n \n-  var SATURN = saturn(data['N_saturn']!, data['i_saturn']!, data['a_saturn']!,\n-      data['w_saturn']!, data['e_saturn']!, data['M_saturn']!, xsun, ysun, d);\n+  var SATURN = dataSaturn(\n+      data['N_saturn']!,\n+      data['i_saturn']!,\n+      data['a_saturn']!,\n+      data['w_saturn']!,\n+      data['e_saturn']!,\n+      data['M_saturn']!,\n+      xsun,\n+      ysun,\n+      d);\n \n-  var URANUS = uranus(data['N_uranus']!, data['i_uranus']!, data['a_uranus']!,\n-      data['w_uranus']!, data['e_uranus']!, data['M_uranus']!, xsun, ysun, d);\n+  var URANUS = dataUranus(\n+      data['N_uranus']!,\n+      data['i_uranus']!,\n+      data['a_uranus']!,\n+      data['w_uranus']!,\n+      data['e_uranus']!,\n+      data['M_uranus']!,\n+      xsun,\n+      ysun,\n+      d);\n \n-  var NEPTUNE = neptune(\n+  var NEPTUNE = dataNeptune(\n       data['N_neptune']!,\n       data['i_neptune']!,\n       data['a_neptune']!,\n       data['w_neptune']!,\n@@ -68,9 +84,9 @@\n       xsun,\n       ysun,\n       d);\n \n-  var PLUTO = pluto(xsun, ysun, d);\n+  var PLUTO = dataPluto(xsun, ysun, d);\n \n   var _planets = [\n     sun,\n     MOON,\n"
+                },
+                {
+                    "date": 1641963735504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \n   var xsun = sun[2];\n   var ysun = sun[3];\n \n-  var MOON = dataMoon(\n+  var moon = dataMoon(\n       data['N_moon']!,\n       data['i_moon']!,\n       data['a_moon']!,\n       data['w_moon']!,\n@@ -23,9 +23,9 @@\n       data['L_sun']!,\n       lst,\n       d);\n \n-  var MERCURY = dataMercury(\n+  var mercury = dataMercury(\n       data['N_mercury']!,\n       data['i_mercury']!,\n       data['a_mercury']!,\n       data['w_mercury']!,\n@@ -34,15 +34,15 @@\n       xsun,\n       ysun,\n       d);\n \n-  var VENUS = dataVenus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n+  var venus = dataVenus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n       data['w_venus']!, data['e_venus']!, data['M_venus']!, xsun, ysun, d);\n \n-  var MARS = dataMars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n+  var mars = dataMars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n       data['w_mars']!, data['e_mars']!, data['M_mars']!, xsun, ysun, d);\n \n-  var JUPITER = dataJupiter(\n+  var jupiter = dataJupiter(\n       data['N_jupiter']!,\n       data['i_jupiter']!,\n       data['a_jupiter']!,\n       data['w_jupiter']!,\n@@ -51,9 +51,9 @@\n       xsun,\n       ysun,\n       d);\n \n-  var SATURN = dataSaturn(\n+  var saturn = dataSaturn(\n       data['N_saturn']!,\n       data['i_saturn']!,\n       data['a_saturn']!,\n       data['w_saturn']!,\n@@ -62,9 +62,9 @@\n       xsun,\n       ysun,\n       d);\n \n-  var URANUS = dataUranus(\n+  var uranus = dataUranus(\n       data['N_uranus']!,\n       data['i_uranus']!,\n       data['a_uranus']!,\n       data['w_uranus']!,\n@@ -73,9 +73,9 @@\n       xsun,\n       ysun,\n       d);\n \n-  var NEPTUNE = dataNeptune(\n+  var neptune = dataNeptune(\n       data['N_neptune']!,\n       data['i_neptune']!,\n       data['a_neptune']!,\n       data['w_neptune']!,\n@@ -84,21 +84,21 @@\n       xsun,\n       ysun,\n       d);\n \n-  var PLUTO = dataPluto(xsun, ysun, d);\n+  var pluto = dataPluto(xsun, ysun, d);\n \n   var _planets = [\n     sun,\n-    MOON,\n-    MERCURY,\n-    VENUS,\n-    MARS,\n-    JUPITER,\n-    SATURN,\n-    URANUS,\n-    NEPTUNE,\n-    PLUTO\n+    moon,\n+    mercury,\n+    venus,\n+    mars,\n+    jupiter,\n+    saturn,\n+    uranus,\n+    neptune,\n+    pluto\n   ];\n \n   var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n \n"
+                },
+                {
+                    "date": 1641965530022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import '../simple/export_planets.dart';\n+import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n   var d = numDate(1977, 5, 27, 16, 52);\n"
+                },
+                {
+                    "date": 1642127578142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,9 +99,9 @@\n     neptune,\n     pluto\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n+  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1642571161332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n       data['w_sun']!, data['e_sun']!, data['M_sun']!, d);\n \n   var xsun = sun[2];\n   var ysun = sun[3];\n+  print('$xsun $ysun');\n \n   var moon = dataMoon(\n       data['N_moon']!,\n       data['i_moon']!,\n"
+                },
+                {
+                    "date": 1642664124321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1977, 5, 27, 16, 52);\n+  var d = numDate(1997, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n@@ -105,13 +105,13 @@\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n-  print('__');\n-  int index = 0;\n-  for (var item in _domes) {\n-    index++;\n-    print('$index-дом __ ${item.toStringAsFixed(2)}');\n-  }\n+  // print('__');\n+  // int index = 0;\n+  // for (var item in _domes) {\n+  //   index++;\n+  //   print('$index-дом __ ${item.toStringAsFixed(2)}');\n+  // }\n \n   // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n }\n"
+                },
+                {
+                    "date": 1642664175778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n     neptune,\n     pluto\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n+  var _domes = domes(1907, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1642664204642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n     neptune,\n     pluto\n   ];\n \n-  var _domes = domes(1907, 5, 27, 16, 52, 42.6, 75.0, d);\n+  var _domes = domes(1947, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1642664242422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1997, 5, 27, 16, 52);\n+  var d = numDate(1907, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n@@ -100,9 +100,9 @@\n     neptune,\n     pluto\n   ];\n \n-  var _domes = domes(1947, 5, 27, 16, 52, 42.6, 75.0, d);\n+  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n"
+                },
+                {
+                    "date": 1642664254434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1907, 5, 27, 16, 52);\n+  var d = numDate(1997, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664279712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1997, 5, 27, 16, 52);\n+  var d = numDate(2027, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664305073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(2027, 5, 27, 16, 52);\n+  var d = numDate(2000, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664337492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(2000, 5, 27, 16, 52);\n+  var d = numDate(1990, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664424709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1990, 5, 27, 16, 52);\n+  var d = numDate(1980, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664446279,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1980, 5, 27, 16, 52);\n+  var d = numDate(1950, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642664466950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import 'simple/export_planets.dart';\n \n void main() {\n   // var lon = 0.0;\n-  var d = numDate(1950, 5, 27, 16, 52);\n+  var d = numDate(1930, 5, 27, 16, 52);\n   var data = initVals(d);\n   var lst = localSidTime(16, 52, data['L_sun'], 0);\n \n   var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n"
+                },
+                {
+                    "date": 1642682252491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n     neptune,\n     pluto\n   ];\n \n-  var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n+  // var _domes = domes(1977, 5, 27, 16, 52, 42.6, 75.0, d);\n \n   for (var item in _planets) {\n     print(item[0]);\n   }\n"
+                }
+            ],
+            "date": 1641631856548,
+            "name": "Commit-0",
+            "content": "// import '../models/simple.dart';\n// ignore_for_file: unused_local_variable, non_constant_identifier_names\n\nimport '../simple/defs/func.dart';\nimport '../simple/const.dart';\nimport '../simple/calc_sun.dart';\nimport '../simple/calc_moon.dart';\nimport '../simple/calc_mercury.dart';\nimport '../simple/calc_venus.dart';\nimport '../simple/calc_mars.dart';\nimport '../simple/calc_jupiter.dart';\nimport '../simple/calc_saturn.dart';\nimport '../simple/calc_uranus.dart';\nimport '../simple/calc_neptune.dart';\nimport '../simple/calc_pluto.dart';\n\nvoid main() {\n  var LON = 0.0;\n  var d = num_date(1977, 5, 27, 16, 52);\n  var data = init_vals(d);\n  var LST = lst(16, 52, data['L_sun'], 0);\n\n  var SUN = sun(data['N_sun']!, data['i_sun']!, data['a_sun']!, data['w_sun']!,\n      data['e_sun']!, data['M_sun']!, d);\n\n  var xsun = SUN[2];\n  var ysun = SUN[3];\n\n  var MOON = moon(\n      data['N_moon']!,\n      data['i_moon']!,\n      data['a_moon']!,\n      data['w_moon']!,\n      data['e_moon']!,\n      data['M_moon']!,\n      data['M_sun']!,\n      data['L_sun']!,\n      LST,\n      d);\n\n  var MERCURY = mercury(\n      data['N_mercury']!,\n      data['i_mercury']!,\n      data['a_mercury']!,\n      data['w_mercury']!,\n      data['e_mercury']!,\n      data['M_mercury']!,\n      xsun,\n      ysun,\n      d);\n\n  var VENUS = venus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n      data['w_venus']!, data['e_venus']!, data['M_venus']!, xsun, ysun, d);\n\n  var MARS = mars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n      data['w_mars']!, data['e_mars']!, data['M_mars']!, xsun, ysun, d);\n\n  var JUPITER = jupiter(\n      data['N_jupiter']!,\n      data['i_jupiter']!,\n      data['a_jupiter']!,\n      data['w_jupiter']!,\n      data['e_jupiter']!,\n      data['M_jupiter']!,\n      xsun,\n      ysun,\n      d);\n\n  var SATURN = saturn(data['N_saturn']!, data['i_saturn']!, data['a_saturn']!,\n      data['w_saturn']!, data['e_saturn']!, data['M_saturn']!, xsun, ysun, d);\n\n  var URANUS = uranus(data['N_uranus']!, data['i_uranus']!, data['a_uranus']!,\n      data['w_uranus']!, data['e_uranus']!, data['M_uranus']!, xsun, ysun, d);\n\n  var NEPTUNE = neptune(\n      data['N_neptune']!,\n      data['i_neptune']!,\n      data['a_neptune']!,\n      data['w_neptune']!,\n      data['e_neptune']!,\n      data['M_neptune']!,\n      xsun,\n      ysun,\n      d);\n\n  var PLUTO = pluto(xsun, ysun, d);\n\n  var _list = [\n    SUN,\n    MOON,\n    MERCURY,\n    VENUS,\n    MARS,\n    JUPITER,\n    SATURN,\n    URANUS,\n    NEPTUNE,\n    PLUTO\n  ];\n  // void _print(double elem) {\n  //   print(elem);\n  // }\n\n  _list.forEach((item) {\n    print(item[0]);\n  });\n  // for (var obj in _list) {\n  //   print(obj[0]);\n  // }\n  // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n}\n"
+        }
+    ]
+}

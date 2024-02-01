@@ -1,0 +1,34 @@
+{
+    "sourceFile": "simple/plugins.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1641960623775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641960834120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,3 @@\n export 'defs/func.dart';\n export 'defs/domes.dart';\n+export 'defs/const.dart';\n"
+                },
+                {
+                    "date": 1641960884591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n export 'defs/func.dart';\n export 'defs/domes.dart';\n export 'defs/const.dart';\n+export 'dart:math';\n"
+                },
+                {
+                    "date": 1641961040759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,15 @@\n export 'defs/func.dart';\n export 'defs/domes.dart';\n export 'defs/const.dart';\n export 'dart:math';\n+\n+export 'calc_sun.dart';\n+export 'calc_moon.dart';\n+export 'calc_mercury.dart';\n+export 'calc_venus.dart';\n+export 'calc_mars.dart';\n+export 'calc_jupiter.dart';\n+export 'calc_saturn.dart';\n+export 'calc_uranus.dart';\n+export 'calc_neptune.dart';\n+export 'calc_pluto.dart';\n"
+                },
+                {
+                    "date": 1641962167229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n-export 'defs/func.dart';\n-export 'defs/domes.dart';\n-export 'defs/const.dart';\n+export 'src/func.dart';\n+export 'src/domes.dart';\n+export 'src/const.dart';\n export 'dart:math';\n \n-export 'calc_sun.dart';\n-export 'calc_moon.dart';\n-export 'calc_mercury.dart';\n-export 'calc_venus.dart';\n-export 'calc_mars.dart';\n-export 'calc_jupiter.dart';\n-export 'calc_saturn.dart';\n-export 'calc_uranus.dart';\n-export 'calc_neptune.dart';\n-export 'calc_pluto.dart';\n+export 'planets/calc_sun.dart';\n+export 'planets/calc_moon.dart';\n+export 'planets/calc_mercury.dart';\n+export 'planets/calc_venus.dart';\n+export 'planets/calc_mars.dart';\n+export 'planets/calc_jupiter.dart';\n+export 'planets/calc_saturn.dart';\n+export 'planets/calc_uranus.dart';\n+export 'planets/calc_neptune.dart';\n+export 'planets/calc_pluto.dart';\n"
+                }
+            ],
+            "date": 1641960623775,
+            "name": "Commit-0",
+            "content": "export 'defs/func.dart';\nexport 'defs/domes.dart';\n"
+        }
+    ]
+}

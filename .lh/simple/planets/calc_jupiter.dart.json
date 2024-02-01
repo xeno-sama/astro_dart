@@ -1,0 +1,22 @@
+{
+    "sourceFile": "simple/planets/calc_jupiter.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1641962375902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1641963570874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import 'export_funcs.dart';\n \n-List<double> jupiter(double N, double i, double a, double w, double e, double M,\n-    double xsun, double ysun, double d) {\n+List<double> dataJupiter(double N, double i, double a, double w, double e,\n+    double M, double xsun, double ysun, double d) {\n // Шаг 1 - вычислить E экцентрическую аномалию\n   double _e = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n   var E = _e -\n       (_e - degrees(e) * sin(radians(_e)) - M) / (1 - e * cos(radians(_e)));\n"
+                }
+            ],
+            "date": 1641962375902,
+            "name": "Commit-0",
+            "content": "import 'export_funcs.dart';\n\nList<double> jupiter(double N, double i, double a, double w, double e, double M,\n    double xsun, double ysun, double d) {\n// Шаг 1 - вычислить E экцентрическую аномалию\n  double _e = M + degrees(e) * sin(radians(M)) * (1.0 + e * cos(radians(M)));\n  var E = _e -\n      (_e - degrees(e) * sin(radians(_e)) - M) / (1 - e * cos(radians(_e)));\n\n// Шаг 2 - вычислить прямоугольные координаты в плоскости лунной орбиты\n  var x = a * (cos(radians(E)) - e);\n  var y = a * sqrt(1 - e * e) * sin(radians(E));\n\n// Шаг 3 - конвертировать в расстояние и истинную аномалию\n  var r = sqrt(x * x + y * y); //расстояние\n  var _v = atan2(y, x);\n  var v = deg_360(degrees(_v)); // -> истинная аномалия в градусах\n\n// Шаг 4 - Теперь можно расчитать эклиптические координаты\n  var xEclip = r *\n      (cos(radians(N)) * cos(radians(v + w)) -\n          sin(radians(N)) * sin(radians(v + w)) * cos(radians(i)));\n  var yEclip = r *\n      (sin(radians(N)) * cos(radians(v + w)) +\n          cos(radians(N)) * sin(radians(v + w)) * cos(radians(i)));\n  // var zEclip = r * sin(radians(v + w)) * sin(radians(i));\n\n// Шаг 5 - конвертировать в эклиптические долготу/широту и расстояние\n// Это наши ГЕЛИОЦЕНТРИЧЕСКИЕ координаты\n  var _lon = atan2(yEclip, xEclip);\n  // var _lat0 = atan2(zEclip, sqrt(xEclip * xEclip + yEclip * yEclip));\n  var lonEcl = deg_360(degrees(_lon));\n  // var lat = degrees(_lat0);\n  // var rs = sqrt(xEclip * xEclip + yEclip * yEclip + zEclip * zEclip);\n\n  // Шаг 6 - Переводим в ГЕОЦЕНТРИЧЕСКИЕ координаты\n  var xgeoc = xEclip + xsun; // *r;\n  var ygeoc = yEclip + ysun; // *r;\n  // var zgeoc = zEclip; // *r;\n\n  // теперь переводим прямоугольные координаты в сферические\n  // var oblecl = 23.4393 - 3.563E-7 * d;\n  // var xequat = xgeoc;\n  // var yequat = ygeoc * cos(radians(oblecl)) - zgeoc * sin(radians(oblecl));\n  // var zequat = ygeoc * sin(radians(oblecl)) + zgeoc * cos(radians(oblecl));\n\n  // var ra = deg_360(degrees(atan2(yequat, xequat)));\n  // var decl = degrees(atan2(zequat, sqrt(xequat * xequat + yequat * yequat)));\n  // var R = sqrt(xequat * xequat + yequat * yequat + zequat * zequat);\n\n  var _lonTopos = atan2(ygeoc, xgeoc);\n  var lonTopos = deg_360(degrees(_lonTopos));\n\n  return [lonTopos, lonEcl];\n}\n\n/* Примечание \nвсе что закомментировал - только потому что мне |пока не требуется| выводить данные\nLAT RA R DECL\n*/"
+        }
+    ]
+}

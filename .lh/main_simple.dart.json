@@ -1,0 +1,18 @@
+{
+    "sourceFile": "main_simple.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642126875159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642126875159,
+            "name": "Commit-0",
+            "content": "import 'bin/simple/export_planets.dart';\n\nvoid main() {\n  // var lon = 0.0;\n  var d = numDate(1977, 5, 27, 16, 52);\n  var data = initVals(d);\n  var lst = localSidTime(16, 52, data['L_sun'], 0);\n\n  var sun = dataSun(data['N_sun']!, data['i_sun']!, data['a_sun']!,\n      data['w_sun']!, data['e_sun']!, data['M_sun']!, d);\n\n  var xsun = sun[2];\n  var ysun = sun[3];\n\n  var moon = dataMoon(\n      data['N_moon']!,\n      data['i_moon']!,\n      data['a_moon']!,\n      data['w_moon']!,\n      data['e_moon']!,\n      data['M_moon']!,\n      data['M_sun']!,\n      data['L_sun']!,\n      lst,\n      d);\n\n  var mercury = dataMercury(\n      data['N_mercury']!,\n      data['i_mercury']!,\n      data['a_mercury']!,\n      data['w_mercury']!,\n      data['e_mercury']!,\n      data['M_mercury']!,\n      xsun,\n      ysun,\n      d);\n\n  var venus = dataVenus(data['N_venus']!, data['i_venus']!, data['a_venus']!,\n      data['w_venus']!, data['e_venus']!, data['M_venus']!, xsun, ysun, d);\n\n  var mars = dataMars(data['N_mars']!, data['i_mars']!, data['a_mars']!,\n      data['w_mars']!, data['e_mars']!, data['M_mars']!, xsun, ysun, d);\n\n  var jupiter = dataJupiter(\n      data['N_jupiter']!,\n      data['i_jupiter']!,\n      data['a_jupiter']!,\n      data['w_jupiter']!,\n      data['e_jupiter']!,\n      data['M_jupiter']!,\n      xsun,\n      ysun,\n      d);\n\n  var saturn = dataSaturn(\n      data['N_saturn']!,\n      data['i_saturn']!,\n      data['a_saturn']!,\n      data['w_saturn']!,\n      data['e_saturn']!,\n      data['M_saturn']!,\n      xsun,\n      ysun,\n      d);\n\n  var uranus = dataUranus(\n      data['N_uranus']!,\n      data['i_uranus']!,\n      data['a_uranus']!,\n      data['w_uranus']!,\n      data['e_uranus']!,\n      data['M_uranus']!,\n      xsun,\n      ysun,\n      d);\n\n  var neptune = dataNeptune(\n      data['N_neptune']!,\n      data['i_neptune']!,\n      data['a_neptune']!,\n      data['w_neptune']!,\n      data['e_neptune']!,\n      data['M_neptune']!,\n      xsun,\n      ysun,\n      d);\n\n  var pluto = dataPluto(xsun, ysun, d);\n\n  var _planets = [\n    sun,\n    moon,\n    mercury,\n    venus,\n    mars,\n    jupiter,\n    saturn,\n    uranus,\n    neptune,\n    pluto\n  ];\n\n  var _domes = domes(1977, 5, 27, 16, 52, 75.0, 42.6, d);\n\n  for (var item in _planets) {\n    print(item[0]);\n  }\n  print('__');\n  int index = 0;\n  for (var item in _domes) {\n    index++;\n    print('$index-дом __ ${item.toStringAsFixed(2)}');\n  }\n\n  // print('$SATURN $URANUS $NEPTUNE $PLUTO');\n}\n"
+        }
+    ]
+}
